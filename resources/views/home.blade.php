@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    Estas logeado
+                    Estas logeado en la rama Prueba
                 </div>
             </div>
         </div>
