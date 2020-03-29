@@ -11,6 +11,20 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    
+    
+    require('admin-lte');
+    //Componente Admil-lte--PLUGINS
+
+    //require('../../node_modules/admin-lte/plugins/datatables/jquery.dataTables');
+    var $ = require( 'jquery' );
+    require( 'datatables.net' )( window, $ );
+
+    require('../../node_modules/admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.js');
+      
+    require('../../node_modules/admin-lte/dist/js/demo.js');
+
+
 } catch (e) {}
 
 /**

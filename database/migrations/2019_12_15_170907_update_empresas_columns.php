@@ -39,6 +39,7 @@ class UpdateEmpresasColumns extends Migration
 
             $table->dropColumn('localidad_id');
 
+            //Volvermos a dejar la columna que borramos en el UP
             $table->string('localidad',200)->nullable();
 
         });

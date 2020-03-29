@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/panel', function () {
+        return view('admin_panel/admin');
+    });
+
+Route::get('/paneladmin', function () {
+        return view('administrador/index');
+    })->middleware(['auth','has.role:administrador_sistema']);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -88,6 +96,27 @@ Route::middleware(['auth'])->group(function(){
             ->middleware('has.permission:users.edit');        
 
 
+    //Obra
+    Route::get('paneladmin/obra_v', function () {
+        return view('administrador/obra/obra_v');
+    })->middleware(['has.role:administrador_sistema']);
 
+    Route::resource('api/obra', 'ObraController')->middleware(['has.role:administrador_sistema']);
+
+
+   /*  Route::get('api/obr', function () {
+
+        return datatables()
+        ->eloquent(App\Obra::query())
+        ->addColumn('columna_botones','administrador\obra\botones_v')
+        ->rawColumns(['columna_botones'])
+        ->toJson();
+    })->middleware(['has.role:administrador_sistema']); */
+
+    //Rutas API sin protección
+
+    Route::resource('api/localidad', 'LocalidadController');
+    
 
 });
+

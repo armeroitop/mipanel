@@ -6,7 +6,20 @@
 
 require('./bootstrap');
 
+window.toastr = require('toastr');
+
+window.select2 = require('select2')
+
+
+ 
+//Componente Admil-lte
+//require('../../node_modules/admin-lte/dist/js/adminlte');
+
+ 
 window.Vue = require('vue');
+
+
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,7 +33,8 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
+/* 
+import router from './routes' */
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -29,4 +43,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    /* router */
 });

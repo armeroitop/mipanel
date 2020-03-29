@@ -22,9 +22,30 @@ class LocalidadController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $localidades = Localidad::where('nombre','LIKE','%'.$request->q.'%')->get();
+
+       //Formateamos la respuesta para que la lea SELECT2
+        $contenedor = [];
+        $nombreProv = "desconocido";
+        
+        foreach ($localidades as $localidad) {
+            //dd($localidad->provincia()->get()->nombre);            
+           
+            if($localidad->provincia){
+                $nombreProv = $localidad->provincia->nombre;
+            }else{
+                $nombreProv = "Provincia desconocida";
+            }
+           // $contenedor[]= ['id' => $localidad->id, 'text' => [$localidad->nombre,' - ', $nombreProv ]];
+            $contenedor[]= ['id' => $localidad->id, 'text' => [$localidad->nombre.' ('.$nombreProv.')']];
+            //$contenedor[]= ['id' => $localidad->id, 'text' => [$localidad->nombre,'-', $localidad->provincia->nombre]];
+            
+            //$contenedor[]= ['id' => $localidad->id, 'text' => [$localidad->nombre]];
+        }
+      
+       return response()->json($contenedor);
     }
 
     /**

@@ -16,3 +16,15 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+/* Route::get('obr', function () {
+
+    return datatables()
+    ->eloquent(App\Obra::query())
+    ->addColumn('columna_botones','administrador\obra\botones_v')
+    ->rawColumns(['columna_botones'])
+    ->toJson();
+});
+ */

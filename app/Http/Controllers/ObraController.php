@@ -13,8 +13,12 @@ class ObraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {        
+        return datatables()
+        ->eloquent(Obra::query())
+        ->addColumn('columna_botones','administrador\obra\botones_v')
+        ->rawColumns(['columna_botones'])
+        ->toJson();        
     }
 
     /**
@@ -22,9 +26,19 @@ class ObraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        
+       $respuesta = Obra::where('nombre','LIKE','%'.$request->q.'%')->get();
+
+       //Formateamos la respuesta para que la lea SELECT2
+        $formateado_obra = [];
+        foreach ($respuesta as $res) {
+            $formateado_obra[]= ['id' => $res->id, 'text' => $res->nombre];
+        }
+      
+       return response()->json($formateado_obra);
+       
     }
 
     /**
@@ -35,7 +49,7 @@ class ObraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -46,7 +60,7 @@ class ObraController extends Controller
      */
     public function show(Obra $obra)
     {
-        //
+       
     }
 
     /**
@@ -57,7 +71,9 @@ class ObraController extends Controller
      */
     public function edit(Obra $obra)
     {
-        //
+
+        //return redirect('home');
+        return $obra;
     }
 
     /**
@@ -80,6 +96,16 @@ class ObraController extends Controller
      */
     public function destroy(Obra $obra)
     {
-        //
+        
+        //Debemos intentar llamar al Toastr de success
+        $notification = array(
+            'message' => 'la obra '.$obra->nombre ,
+            'titulo' => 'Se ha borrado',
+            'alert-type' => 'success'
+        ); 
+        $obra->delete();
+        //dd($obra);
+        //return $obra;
+        return back()->with($notification);
     }
 }
