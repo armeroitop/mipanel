@@ -18,12 +18,19 @@
         <a href="{{route('obra.edit', $id)}}" type="submit">Ver</a>
       </form>
     </li>
+   
 
     <li class="dropdown-item">
-      <form method="get">
-        @csrf
-        <a href="{{route('obra.edit', $id)}}" type="submit" >Editar</a>
-      </form>
+      <li  class="dropdown-item"  data-toggle="modal" data-target="#modal-editObra" onclick="editObra({{$id}},
+                                                                                                      '{{json_encode($nombre)}}',
+                                                                                                      '{{json_encode($descripcion)}}',
+                                                                                                      '{{json_encode($direccion)}}',
+                                                                                                      '{{$proyecto}}',
+                                                                                                      '{{$localidad_id}}',
+                                                                                                      '{{$inicio_previsto}}',
+                                                                                                      '{{$fin_previsto}}')">           
+        <a  href="#"   data-descripcion="" >Editar</a>
+      </li>
     </li>
 
     <li class="dropdown-divider" ></li>

@@ -14,15 +14,15 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{url('paneladmin/obra_v')}}" class="nav-link">              
+            <a href="{{url('paneladmin/obra')}}" class="nav-link">              
               <i class="fas fa-circle nav-icon"></i>
-              <p>Obras activas</p>
+              <p>Obras</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
-              <p>Obras terminadas</p>
+              <p>Subcontrataciones</p>
             </a>
           </li>
         </ul>
@@ -36,17 +36,24 @@
             Empresas
             <i class="right fas fa-angle-left"></i>
           </p>
-        </a>
+        </a>       
+         
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="#" class="nav-link active">
-              <i class="far fa-circle nav-icon"></i>
+            <a href="{{url('paneladmin/empresa')}}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>Empresa</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('paneladmin/trabajador')}}"  class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
               <p>Trabajador</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
+              <i class="fas fa-circle nav-icon"></i>
               <p>Maquinaria</p>
             </a>
           </li>
@@ -66,7 +73,7 @@
           <li class="nav-item">
             <a href="#" class="nav-link active">
               <i class="far fa-circle nav-icon"></i>
-              <p>Empresas</p>
+              <p>Perfil</p>
             </a>
           </li>
           <li class="nav-item">
@@ -89,15 +96,15 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="{{url('paneladmin/rol')}}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Empresas</p>
+              <p>Rol</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('paneladmin/permiso')}}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Inactive Paja</p>
+              <p>Permiso</p>
             </a>
           </li>
         </ul>

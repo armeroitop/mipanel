@@ -31,18 +31,13 @@ class LocalidadController extends Controller
         $nombreProv = "desconocido";
         
         foreach ($localidades as $localidad) {
-            //dd($localidad->provincia()->get()->nombre);            
-           
+                      
             if($localidad->provincia){
                 $nombreProv = $localidad->provincia->nombre;
             }else{
                 $nombreProv = "Provincia desconocida";
-            }
-           // $contenedor[]= ['id' => $localidad->id, 'text' => [$localidad->nombre,' - ', $nombreProv ]];
-            $contenedor[]= ['id' => $localidad->id, 'text' => [$localidad->nombre.' ('.$nombreProv.')']];
-            //$contenedor[]= ['id' => $localidad->id, 'text' => [$localidad->nombre,'-', $localidad->provincia->nombre]];
-            
-            //$contenedor[]= ['id' => $localidad->id, 'text' => [$localidad->nombre]];
+            }           
+            $contenedor[]= ['id' => $localidad->id, 'text' => [$localidad->nombre.' ('.$nombreProv.')']];            
         }
       
        return response()->json($contenedor);
@@ -65,9 +60,17 @@ class LocalidadController extends Controller
      * @param  \App\Localidad  $localidad
      * @return \Illuminate\Http\Response
      */
-    public function show(Localidad $localidad)
-    {
-        //
+    public function show(Request $request)
+    {        
+        $localidad = Localidad::find($request->localidad);
+        //dd($localidad);
+        if($localidad){
+            $contenedor[]= ['id' => $localidad->id, 'text' => $localidad->nombre];
+        }else{
+            $contenedor[]= ['id' => null, 'text' => 'No has seleccionado ninguna localidad todavia'];
+        }
+              
+        return response()->json($contenedor);
     }
 
     /**

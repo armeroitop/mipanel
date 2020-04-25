@@ -16,13 +16,35 @@ try {
     require('admin-lte');
     //Componente Admil-lte--PLUGINS
 
-    //require('../../node_modules/admin-lte/plugins/datatables/jquery.dataTables');
-    var $ = require( 'jquery' );
-    require( 'datatables.net' )( window, $ );
-
-    require('../../node_modules/admin-lte/plugins/datatables-bs4/js/dataTables.bootstrap4.js');
-      
+    
+    require('../../node_modules/admin-lte/plugins/jquery-ui/jquery-ui.js');
+    /* require('../../node_modules/admin-lte/plugins/chart.js/Chart.js');
+    require('../../node_modules/admin-lte/plugins/sparklines/sparkline.js'); */
+    require('../../node_modules/admin-lte/plugins/jqvmap/jquery.vmap.js');
+    require('../../node_modules/admin-lte/plugins/jqvmap/maps/jquery.vmap.usa.js');
+    require('../../node_modules/admin-lte/plugins/summernote/summernote.js');
+    /* require('../../node_modules/admin-lte/plugins/moment/moment-with-locales'); */   
+    /* require('../../node_modules/admin-lte/dist/js/pages/dashboard.js'); */
     require('../../node_modules/admin-lte/dist/js/demo.js');
+    
+
+    {/* 
+    <script src="plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="plugins/summernote/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/adminlte.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="dist/js/pages/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="dist/js/demo.js"></script> */}
+    
+    
+    
 
 
 } catch (e) {}

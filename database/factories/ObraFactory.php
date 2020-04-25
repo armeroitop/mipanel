@@ -13,6 +13,5 @@ $factory->define(Obra::class, function (Faker $faker) {
         'proyecto'          => $faker->boolean,
         'inicio_previsto'   => $faker->dateTimeAD,
         'fin_previsto'      => $faker->dateTimeAD,
-
     ];
 });

@@ -97,26 +97,45 @@ Route::middleware(['auth'])->group(function(){
 
 
     //Obra
-    Route::get('paneladmin/obra_v', function () {
-        return view('administrador/obra/obra_v');
+    Route::get('paneladmin/obra', function () {
+        return view('administrador/obra/index');
     })->middleware(['has.role:administrador_sistema']);
 
     Route::resource('api/obra', 'ObraController')->middleware(['has.role:administrador_sistema']);
 
+    //Empresas
+    Route::get('paneladmin/empresa', function () {
+        return view('administrador/empresa/index');
+    })->middleware(['has.role:administrador_sistema']);
 
-   /*  Route::get('api/obr', function () {
+    Route::resource('api/empresa', 'EmpresaController');
 
-        return datatables()
-        ->eloquent(App\Obra::query())
-        ->addColumn('columna_botones','administrador\obra\botones_v')
-        ->rawColumns(['columna_botones'])
-        ->toJson();
-    })->middleware(['has.role:administrador_sistema']); */
 
-    //Rutas API sin protección
-
+    //Localidades
     Route::resource('api/localidad', 'LocalidadController');
-    
+
+
+    //Trabajadores
+    Route::get('paneladmin/trabajador', function () {
+        return view('administrador/trabajador/index');
+    })->middleware(['has.role:administrador_sistema']);
+
+    Route::resource('api/persona', 'PersonaController');
+
+
+    //Roles
+    Route::get('paneladmin/rol', function () {
+        return view('administrador/rol/index');
+    })->middleware(['has.role:administrador_sistema']);
+
+    Route::resource('api/rol', 'RoleController');
+
+    //Permisos
+    Route::get('paneladmin/permiso', function () {
+        return view('administrador/permiso/index');
+    })->middleware(['has.role:administrador_sistema']);
+
+    Route::resource('api/permiso', 'PermisoController');
 
 });
 

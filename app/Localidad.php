@@ -9,6 +9,7 @@ class Localidad extends Model
     
     public function provincia()
     {
-        return $this->belongsTo('App\Provincia','provincia_id');
+        //return $this->belongsTo('App\Provincia','provincia_id');
+        return $this->belongsTo('App\Provincia');
     }
 }

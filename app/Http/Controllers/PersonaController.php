@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Persona;
+use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 
 class PersonaController extends Controller
@@ -14,7 +15,12 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        //
+        return datatables()
+        ->eloquent(Persona::query())
+        ->addColumn('columna_botones','administrador\trabajador\partials\botonesDT')
+        ->rawColumns(['columna_botones'])
+        ->toJson();  
+       
     }
 
     /**
@@ -35,7 +41,17 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $persona = new Persona($request->all());
+        $persona->save();
+
+        $notification = array(
+            'message' => 'el trabajador '.$persona->nombre ,
+            'titulo' => 'Se ha guardado',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
     }
 
     /**
@@ -55,9 +71,10 @@ class PersonaController extends Controller
      * @param  \App\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function edit(Persona $persona)
+    public function edit(Request $request, Persona $persona)
     {
-        //
+        $rol = Role::find(5);
+        return response()->json($rol);
     }
 
     /**
@@ -69,7 +86,15 @@ class PersonaController extends Controller
      */
     public function update(Request $request, Persona $persona)
     {
-        //
+        $persona->update($request->all());
+
+        $notification = array(
+            'message' => 'el trabajador '.$persona->nombre ,
+            'titulo' => 'Se ha actualizado',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
     }
 
     /**
@@ -80,6 +105,15 @@ class PersonaController extends Controller
      */
     public function destroy(Persona $persona)
     {
-        //
+        $persona->delete();
+
+        $notification = array(
+            'message' => 'el trabajador '.$persona->nombre ,
+            'titulo' => 'Ha sido eliminado',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
+
     }
 }

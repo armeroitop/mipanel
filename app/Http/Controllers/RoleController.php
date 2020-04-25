@@ -15,10 +15,18 @@ class RoleController extends Controller
      */
     public function index()
     {
+        return datatables()
+        ->eloquent(Role::query())
+        ->addColumn('columna_botones','administrador\rol\partials\botonesDT')
+        ->rawColumns(['columna_botones'])
+        ->toJson();     
+    }
+    /* public function index()
+    {
         $roles = Role::paginate();
 
         return view('roles.index', compact('roles'));
-    }
+    } */
 
     /**
      * Show the form for creating a new resource.
@@ -27,9 +35,13 @@ class RoleController extends Controller
      */
     public function create()
     {
+        /* $permissions = Permission::get();
+
+        return view('roles.create', compact('permissions')); */
+
         $permissions = Permission::get();
 
-        return view('roles.create', compact('permissions'));
+        return response()->json($permissions);;
     }
 
     /**
@@ -38,15 +50,29 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    /* public function store(Request $request)
+    {        
+        $role = Role::create($request->all());
+        //Actualización de permisos
+        $role->permissions()->sync($request->get('permissions'));
+        return redirect()->route('roles.edit',$role->id)
+        ->with('info','Role guardado exitosamente');
+    } */
     public function store(Request $request)
     {
+        //dd($request->all());
         $role = Role::create($request->all());
 
         //Actualización de permisos
-        $role->permissions()->sync($request->get('permissions'));
+        $role->permissions()->sync($request->get('permisos'));
 
-        return redirect()->route('roles.edit',$role->id)
-        ->with('info','Role guardado exitosamente');
+        $notification = array(
+            'message' => 'el rol '.$role->name ,
+            'titulo' => 'Ha sido creado',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
     }
 
     /**
@@ -55,10 +81,12 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(Role $role)
+    public function show(Request $request)
     {
-        //dd($role->id);
-        return view('roles.show',compact('role'));
+        
+        $rol = Role::find($request->rol);
+        return response()->json($rol);
+        //return view('roles.show',compact('role'));
     }
 
     /**
@@ -67,10 +95,23 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function edit(Role $role)
+    /* public function edit(Role $role)
     {
-        $permissions = Permission::get();
+        $permissions = Permission::get();       
         return view('roles.edit',compact('role', 'permissions'));
+    } */
+    public function edit(Request $request)
+    {
+        
+        $permissions = Permission::get();
+        // $role;
+        $rol = Role::find($request->rol);
+        $permisos_activos = $rol->permissions()->get()->pluck('id');
+        $permiso_especial = $rol->special;
+        
+        return response()->json([$permisos_activos, $permissions,$permiso_especial]);
+        //return ;
+        //return view('roles.edit',compact('role', 'permissions'));
     }
 
     /**
@@ -80,8 +121,9 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+   /*  public function update(Request $request, Role $role)
     {
+        //dd($request->all());
         //Actualización del role
         $role->update($request->all());
 
@@ -91,6 +133,25 @@ class RoleController extends Controller
         //Retorno a la vista
         return redirect()->route('roles.edit',$role->id)
         ->with('info','Role actualizado exitosamente');
+    } */
+    public function update(Request $request, Role $role)
+    {        
+        //Actualización del role
+        //dd($request->get('special'));
+        $role = Role::find($request->rol);
+        $role->update($request->all());
+        $role->update(['special' => $request->get('special') ]);
+
+        //Actualización de permisos
+        $role->permissions()->sync($request->get('permisos'));
+
+        $notification = array(
+            'message' => 'el rol '.$role->name ,
+            'titulo' => 'Ha sido actualizado',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
     }
 
     /**
@@ -99,10 +160,17 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Role $role)
+    public function destroy(Request $request,Role $role)
     {
+        $role = Role::find($request->rol);
         $role->delete();
 
-        return back()->with('info', 'Usero eliminado');
+        $notification = array(
+            'message' => 'el rol '.$role->name ,
+            'titulo' => 'Ha sido eliminado',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Obra;
+use App\Subcontratacion;
 use Illuminate\Http\Request;
 
 class ObraController extends Controller
@@ -16,7 +17,7 @@ class ObraController extends Controller
     {        
         return datatables()
         ->eloquent(Obra::query())
-        ->addColumn('columna_botones','administrador\obra\botones_v')
+        ->addColumn('columna_botones','administrador\obra\partials\botonesDT')
         ->rawColumns(['columna_botones'])
         ->toJson();        
     }
@@ -49,7 +50,27 @@ class ObraController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $obra = new Obra($request->all());
+        $obra->proyecto = $request->proyecto == 'con' ? 1:0;
+        
+        $obra->save(); //falta meter la asignación del promotor.
+
+        $subcontratacion = new Subcontratacion($request->all());
+        $subcontratacion->orden = -1;
+        $subcontratacion->nivel = -1;
+        $subcontratacion->contratante_id = $request->promotor;
+        $subcontratacion->contratado_id = $request->promotor;
+        $subcontratacion->obra_id = $obra->id;
+        $subcontratacion->save();
+
+
+        $notification = array(
+            'message' => 'la obra '.$obra->nombre ,
+            'titulo' => 'Se ha guardada',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
     }
 
     /**
@@ -60,7 +81,17 @@ class ObraController extends Controller
      */
     public function show(Obra $obra)
     {
-       
+        //$promotor= $obra->subcontratacion()->where('nivel', -1)->first()->contratante;
+        $promotor= $obra->subcontratacion()->where('nivel', -1)->first();
+        if($promotor){
+            //$promotor->contratante;
+            $contenedor[]= ['id' => $promotor->contratante->id, 'text' => $promotor->contratante->nombre];
+        }else{
+            //$contenedor[]= ['id' => 2, 'text' => 'Escayolas Martínez S.A.'];
+            $contenedor[]= ['id' => null, 'text' => 'No has seleccionado ningún promotor todavia'];
+        }
+                
+        return response()->json($contenedor);
     }
 
     /**
@@ -84,8 +115,33 @@ class ObraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Obra $obra)
-    {
-        //
+    {            
+        $obra->update([
+                'nombre'        =>  $request->nombre,        
+                'descripcion'   =>  $request->descripcion,
+                'direccion'     =>  $request->direccion,
+                'proyecto'      =>  $request->proyecto == 'con' ? 1:0,                
+                'localidad_id'  =>  json_decode($request->localidad_id),
+                'inicio_previsto' =>$request->inicio_previsto,
+                'fin_previsto'  =>  $request->fin_previsto
+        ]);
+        
+        if($request->promotor != 'null'){
+            $subcontratacion = $obra->subcontratacion()->where('nivel', -1)->first();
+            $subcontratacion->update([
+                'contratante_id' =>  $request->promotor,
+                'contratado_id'  =>  $request->promotor
+            ]);            
+        }      
+        
+
+        $notification = array(
+            'message'   => 'la obra '.$obra->nombre ,
+            'titulo'    => 'Se ha actualizado',
+            'alert-type' => 'success'
+        ); 
+        return back()->with($notification);
+        dd($obra); 
     }
 
     /**
@@ -96,16 +152,12 @@ class ObraController extends Controller
      */
     public function destroy(Obra $obra)
     {
-        
-        //Debemos intentar llamar al Toastr de success
+        $obra->delete();
         $notification = array(
             'message' => 'la obra '.$obra->nombre ,
             'titulo' => 'Se ha borrado',
             'alert-type' => 'success'
-        ); 
-        $obra->delete();
-        //dd($obra);
-        //return $obra;
+        );       
         return back()->with($notification);
     }
 }

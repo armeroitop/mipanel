@@ -8,18 +8,14 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
   <title>{{ config('app.name')}}</title>
-
   
   <!-- Theme style -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
-  {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/> --}}
- 
+  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"> --}}
+  {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> --}}
+     
   <!-- Google Font: Source Sans Pro -->  
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -256,8 +252,10 @@
         
     @endif
 
-    
-      
+    //Con esto guardamos el estado del menu arbol
+   // $('ul').on('expanded.lte.treeview', function(){alert('hey')});  
+    //$('ul').on('collapsed.lte.treeview', function(){alert('au loco')});  
+    //$('ul').on('load.lte.treeview', function(){alert('reload menu')});  
 
 
 </script>

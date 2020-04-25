@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 
+
 window.toastr = require('toastr');
 
 window.select2 = require('select2')
@@ -20,6 +21,10 @@ window.Vue = require('vue');
 
 
 
+window.dt = require( 'datatables.net');
+//require( 'datatables.net-bs4' )( $ );
+window.dtBootstrap = require('datatables.net-bs4');
+//require( 'datatables.net-buttons-bs4' )( $ );
 
 /**
  * The following block of code may be used to automatically register your

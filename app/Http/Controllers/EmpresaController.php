@@ -14,17 +14,33 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        //
+        $empresas = Empresa::with('localidad');        
+        
+        return datatables()
+        ->eloquent($empresas)
+        /* ->editColumn('localidad_id', function($empresas){return $empresas->localidad->nombre;}) */
+        ->editColumn('localidad_id', function($empresas){return $empresas->localidad->nombre;})
+        ->addColumn('columna_botones','administrador\empresa\partials\botonesDT')
+        ->rawColumns(['columna_botones'])
+        ->toJson();
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $respuesta = Empresa::where('nombre','LIKE','%'.$request->q.'%')->get();
+
+        //Formateamos la respuesta para que la lea SELECT2
+         $formateado_respuesta = [];
+         foreach ($respuesta as $res) {
+             $formateado_respuesta[]= ['id' => $res->id, 'text' => $res->nombre];
+         }
+       
+        return response()->json($formateado_respuesta);
     }
 
     /**
@@ -35,7 +51,16 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $empresa = new Empresa($request->all());
+        $empresa->save();
+
+        $notification = array(
+            'message' => 'la empresa '.$empresa->nombre ,
+            'titulo' => 'Se ha guardado',
+            'alert-type' => 'success'
+        ); 
+        return back()->with($notification);
+
     }
 
     /**
@@ -57,7 +82,7 @@ class EmpresaController extends Controller
      */
     public function edit(Empresa $empresa)
     {
-        //
+        dd($empresa);
     }
 
     /**
@@ -69,7 +94,14 @@ class EmpresaController extends Controller
      */
     public function update(Request $request, Empresa $empresa)
     {
-        //
+        $empresa->update($request->all());
+
+        $notification = array(
+            'message' => 'La empresa '.$empresa->nombre ,
+            'titulo' => 'Se ha actualizado',
+            'alert-type' => 'success'
+        ); 
+        return back()->with($notification);
     }
 
     /**
@@ -80,6 +112,12 @@ class EmpresaController extends Controller
      */
     public function destroy(Empresa $empresa)
     {
-        //
+        $empresa->delete();
+        $notification = array(
+            'message' => 'la empresa '.$empresa->nombre ,
+            'titulo' => 'Se ha borrado',
+            'alert-type' => 'success'
+        ); 
+        return back()->with($notification);
     }
 }
