@@ -85,25 +85,6 @@
         }); /* fin DATATABLE */  
   
     });  
-   
-
-    $('#checkbox_acceso0').change(function() {
-        
-        $('#acceso1').prop('disabled', !this.checked);
-        $('#acceso1').prop('checked', false);
-
-        $('#acceso2').prop('disabled', !this.checked);
-        $('#acceso2').prop('checked', false);
-    });
-    $('#edit_checkbox_acceso0').change(function() {
-        
-        $('#edit_acceso1').prop('disabled', !this.checked);
-        $('#edit_acceso1').prop('checked', false);
-
-        $('#edit_acceso2').prop('disabled', !this.checked);
-        $('#edit_acceso2').prop('checked', false);
-    });
-
  
    
     //Este metodo carga los permisos en el modal de EDIT PERMISO

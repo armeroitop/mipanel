@@ -29,7 +29,7 @@ class PermisoController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -40,7 +40,16 @@ class PermisoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $permiso = Permission::create($request->all());
+
+        $notification = array(
+            'message' => 'el persmiso '.$permiso->name ,
+            'titulo' => 'Ha sido creado',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
     }
 
     /**
@@ -74,7 +83,17 @@ class PermisoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //dd( $request->all());
+        $permiso = Permission::find($id);
+        $permiso->update($request->all());
+
+        $notification = array(
+            'message' => 'el rol '.$permiso->name ,
+            'titulo' => 'Ha sido actualizado',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
     }
 
     /**
@@ -85,6 +104,16 @@ class PermisoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $permiso = Permission::find($id);
+        $permiso->delete();
+
+        $notification = array(
+            'message' => 'el permiso '.$permiso->name ,
+            'titulo' => 'Ha sido eliminado',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
     }
 }

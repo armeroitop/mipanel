@@ -21,12 +21,7 @@ class RoleController extends Controller
         ->rawColumns(['columna_botones'])
         ->toJson();     
     }
-    /* public function index()
-    {
-        $roles = Role::paginate();
-
-        return view('roles.index', compact('roles'));
-    } */
+    
 
     /**
      * Show the form for creating a new resource.
@@ -34,13 +29,8 @@ class RoleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        /* $permissions = Permission::get();
-
-        return view('roles.create', compact('permissions')); */
-
+    {       
         $permissions = Permission::get();
-
         return response()->json($permissions);;
     }
 
@@ -59,8 +49,7 @@ class RoleController extends Controller
         ->with('info','Role guardado exitosamente');
     } */
     public function store(Request $request)
-    {
-        //dd($request->all());
+    {        
         $role = Role::create($request->all());
 
         //Actualización de permisos
@@ -102,16 +91,13 @@ class RoleController extends Controller
     } */
     public function edit(Request $request)
     {
-        
-        $permissions = Permission::get();
-        // $role;
+        //$permissions = Permission::get();
+        $permissions = Permission::orderBy('id','desc')->get();
         $rol = Role::find($request->rol);
         $permisos_activos = $rol->permissions()->get()->pluck('id');
         $permiso_especial = $rol->special;
         
-        return response()->json([$permisos_activos, $permissions,$permiso_especial]);
-        //return ;
-        //return view('roles.edit',compact('role', 'permissions'));
+        return response()->json([$permisos_activos, $permissions, $permiso_especial]);
     }
 
     /**
@@ -121,19 +107,7 @@ class RoleController extends Controller
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-   /*  public function update(Request $request, Role $role)
-    {
-        //dd($request->all());
-        //Actualización del role
-        $role->update($request->all());
-
-        //Actualización de permisos
-        $role->permissions()->sync($request->get('permissions'));
-
-        //Retorno a la vista
-        return redirect()->route('roles.edit',$role->id)
-        ->with('info','Role actualizado exitosamente');
-    } */
+  
     public function update(Request $request, Role $role)
     {        
         //Actualización del role

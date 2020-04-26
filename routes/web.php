@@ -56,26 +56,13 @@ Route::middleware(['auth'])->group(function(){
 
 
     //Products
-    Route::post('products/store', 'ProductController@store')->name('products.store')
-            ->middleware('has.permission:products.create');
-
-    Route::get('products', 'ProductController@index')->name('products.index')
-            ->middleware('has.permission:products.index');
-
-    Route::get('products/create', 'ProductController@create')->name('products.create')
-            ->middleware('has.permission:products.create');
-
-    Route::put('products/{product}', 'ProductController@update')->name('products.update')
-            ->middleware('has.permission:products.edit');
-
-    Route::get('products/{product}', 'ProductController@show')->name('products.show')
-            ->middleware('has.permission:products.show');
-
-    Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy')
-            ->middleware('has.permission:products.destroy');
-
-    Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit')
-            ->middleware('has.permission:products.edit');        
+    Route::post('products/store', 'ProductController@store')->name('products.store')->middleware('has.permission:products.create');
+    Route::get('products', 'ProductController@index')->name('products.index')->middleware('has.permission:products.index');
+    Route::get('products/create', 'ProductController@create')->name('products.create')->middleware('has.permission:products.create');
+    Route::put('products/{product}', 'ProductController@update')->name('products.update')->middleware('has.permission:products.edit');
+    Route::get('products/{product}', 'ProductController@show')->name('products.show')->middleware('has.permission:products.show');
+    Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy')->middleware('has.permission:products.destroy');
+    Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit')->middleware('has.permission:products.edit');        
 
 
     //Users

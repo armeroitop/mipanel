@@ -14,7 +14,7 @@
       </li>     
   
       <li class="dropdown-item">
-        <li  class="dropdown-item"  data-toggle="modal" data-target="#modal-editPERMIS" onclick="editPermiso({{$id}},
+        <li  class="dropdown-item"  data-toggle="modal" data-target="#modal-editPermiso" onclick="editPermiso({{$id}},
                                                                                                         '{{$name}}',
                                                                                                         '{{$slug}}',
                                                                                                         '{{$description}}')">           

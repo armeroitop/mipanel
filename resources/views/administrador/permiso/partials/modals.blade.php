@@ -99,44 +99,7 @@
               <label>Descripción</label>
               <textarea class="form-control" id="edit_description" placeholder="Describe que permite hacer este Permiso" rows="3" name="description"></textarea>
             </div>
-            
-            <div class="form-group">
-              <div class="icheck-primary" id="elemVue">
-                <input name="checkbox_acceso0" id="edit_checkbox_acceso0" type="checkbox"  value="acceso" >
-                <label for="edit_checkbox_acceso0">Permiso especial</label>
-              </div> 
-              <div class="icheck-primary d-inline">
-                <input name="special" id="edit_acceso1" type="radio"  value="all-access" disabled=''>
-                <label for="edit_acceso1">all-access</label>
-              </div>
-              <div class="icheck-primary d-inline">
-                <input name="special" id="edit_acceso2" type="radio"  value="no-access" disabled=''>
-                {{-- <input name="special" id="edit_acceso2" type="hidden"  value="null" > --}}
-                <label for="edit_acceso2">no-access</label>
-              </div>            
-            </div>
-            
-            <div class="form-group card">
-                <div class="card-header">
-                  <h3 class="card-title">Lista de permisos</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                  <table class="table table-hover text-nowrap">
-                    <thead>
-                      <tr>
-                        <th>Check</th>
-                        <th>Nombre</th>
-                        <th>Slug</th>
-                        <th>Descripcion</th>                        
-                      </tr>
-                    </thead>
-                    <tbody id="edit_tablaPermisos">
-                      {{-- aqui se inserta de forma dinamica la tabla --}}
-                    </tbody>
-                  </table>
-                </div> <!-- /.card-body -->               
-              </div>                     
+                                 
           </div> {{-- Fin de "modal-body" --}}          
         
           <div class="modal-footer justify-content-between">
