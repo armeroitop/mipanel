@@ -15,7 +15,7 @@
       <li class="dropdown-item">
         <form method="get">
           @csrf
-          <a href="{{route('empresa.edit', $id)}}" type="submit">Ver</a>
+          <a href="{{route('empresa.ver', $id)}}" type="submit">Ver</a>
         </form>
       </li>
   

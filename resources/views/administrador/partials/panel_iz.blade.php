@@ -1,5 +1,5 @@
 <nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+    <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
       <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
 
@@ -71,9 +71,9 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="{{url('paneladmin/usuario')}}" class="nav-link active">
               <i class="far fa-circle nav-icon"></i>
-              <p>Perfil</p>
+              <p>Usuarios</p>
             </a>
           </li>
           <li class="nav-item">

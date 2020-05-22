@@ -6,12 +6,12 @@
     </button>
     <ul class="dropdown-menu" style="left: 0px; top: 0px; position: absolute; transform: translate3d(0px, 48px, 0px);" x-placement="bottom-start">
   
-      <li class="dropdown-item">
+      {{-- <li class="dropdown-item">
         <form method="get">
           @csrf
           <a href="{{route('persona.edit', $id)}}" type="submit">Ver</a>
         </form>
-      </li>     
+      </li> --}}     
   
       <li class="dropdown-item">
         <li  class="dropdown-item"  data-toggle="modal" data-target="#modal-editTrabajador" onclick="editTrabajador({{$id}},

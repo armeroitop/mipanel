@@ -126,7 +126,7 @@ class ObraController extends Controller
                 'fin_previsto'  =>  $request->fin_previsto
         ]);
         
-        if($request->promotor != 'null'){
+        if($request->promotor != 'null' && $request->promotor != ''){
             $subcontratacion = $obra->subcontratacion()->where('nivel', -1)->first();
             $subcontratacion->update([
                 'contratante_id' =>  $request->promotor,
@@ -160,4 +160,33 @@ class ObraController extends Controller
         );       
         return back()->with($notification);
     }
+
+
+    public function ver(Obra $obra)
+    {
+        //dd($obra);
+        $localidad = $obra->localidad;
+        if ($localidad) {
+            $localidad->provincia;
+        }
+        
+       
+        $promotor = $obra->subcontratacion()->where('nivel', -1)->first();
+        if($promotor){
+            $promotor->contratante;
+        }
+
+        $subcontrataciones = $obra->subcontratacion()->with(['contratado'])->get();
+        //$subcontrataciones->contratado;
+
+        return view('administrador.obra.ver',['obra'      => $obra,
+                                                    'localidad' => $localidad,
+                                                    'promotor' => $promotor,
+                                                    'subcontrataciones' => $subcontrataciones
+                                                    ]); 
+                                                            
+
+    }
+
+
 }

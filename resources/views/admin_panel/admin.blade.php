@@ -12,12 +12,14 @@
   
   <!-- Theme style -->
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  @yield('styles')
   
   {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css"> --}}
   {{-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"> --}}
      
   <!-- Google Font: Source Sans Pro -->  
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
 </head>
 
 
@@ -149,7 +151,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="{{ url('/') }}" class="brand-link">
       <img src="{{asset('img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">Plataforma CSS</span>
@@ -232,6 +234,7 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         }
+        
    @if(Session::has('message'))
         var type="{{Session::get('alert-type','info')}}"
     

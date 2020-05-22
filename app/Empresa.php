@@ -18,4 +18,17 @@ class Empresa extends Model
     {
         return $this->belongsTo('App\Localidad','localidad_id');
     }
+
+
+    // tiene trabajadores con estado activo
+    public function trabajador()
+    {
+        return $this->belongsToMany('App\Persona','contratos','empresa_id','persona_id')
+            
+            ->withTimestamps();
+    }
+
+
+    // tiene trabajadores con estado baja
+    
 }

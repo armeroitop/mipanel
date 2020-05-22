@@ -14,18 +14,14 @@
       </li>     
   
       <li class="dropdown-item">
-        <li  class="dropdown-item"  data-toggle="modal" data-target="#modal-editTrabajador" onclick="editTrabajador({{$id}},
-                                                                                                                    '{{$nombre}}',
-                                                                                                                    '{{$apellidos}}',
-                                                                                                                    '{{$dni}}',
-                                                                                                                    '{{$fecha_nacimiento}}')">           
+        <li  class="dropdown-item"  data-toggle="modal" data-target="#modal-editUsuario" onclick="editUsuario({{$id}},'{{$name}}','{{$email}}')">           
           <a  href="#"   data-descripcion="" >Editar</a>
         </li>
       </li>
   
       <li class="dropdown-divider" ></li>
   
-      <li  class="dropdown-item"  data-toggle="modal" data-target="#modal-eliminaTrabajador" onclick="eliminaTrabajador({{$id}},'{{$nombre}}','{{$apellidos}}')">           
+      <li  class="dropdown-item"  data-toggle="modal" data-target="#modal-eliminaUsuario" onclick="eliminaUsuario({{$id}},'{{$name}}')">           
         <a  href="#" >Eliminar</a>
       </li>
   

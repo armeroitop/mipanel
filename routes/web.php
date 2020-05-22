@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -56,19 +58,18 @@ Route::middleware(['auth'])->group(function(){
 
 
     //Products
-    Route::post('products/store', 'ProductController@store')->name('products.store')->middleware('has.permission:products.create');
-    Route::get('products', 'ProductController@index')->name('products.index')->middleware('has.permission:products.index');
-    Route::get('products/create', 'ProductController@create')->name('products.create')->middleware('has.permission:products.create');
-    Route::put('products/{product}', 'ProductController@update')->name('products.update')->middleware('has.permission:products.edit');
-    Route::get('products/{product}', 'ProductController@show')->name('products.show')->middleware('has.permission:products.show');
-    Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy')->middleware('has.permission:products.destroy');
-    Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit')->middleware('has.permission:products.edit');        
+    Route::post('products/store', 'ProductController@store')->name('products.store')            ->middleware('has.permission:products.create');
+    Route::get('products', 'ProductController@index')->name('products.index')                   ->middleware('has.permission:products.index');
+    Route::get('products/create', 'ProductController@create')->name('products.create')          ->middleware('has.permission:products.create');
+    Route::put('products/{product}', 'ProductController@update')->name('products.update')       ->middleware('has.permission:products.edit');
+    Route::get('products/{product}', 'ProductController@show')->name('products.show')           ->middleware('has.permission:products.show');
+    Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy')  ->middleware('has.permission:products.destroy');
+    Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit')      ->middleware('has.permission:products.edit');        
 
 
     //Users
   
-    Route::get('users', 'UserController@index')->name('users.index')
-            ->middleware('has.permission:users.index');
+    Route::get('users', 'UserController@index')->name('users.index')->middleware('has.permission:users.index');
    
     Route::put('users/{user}', 'UserController@update')->name('users.update')
             ->middleware('has.permission:users.edit');
@@ -82,19 +83,31 @@ Route::middleware(['auth'])->group(function(){
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')
             ->middleware('has.permission:users.edit');        
 
+    Route::post('users/asignapersona', 'UserController@asignapersona')->name('users.asignapersona');        
+
+    //Usuario
+    Route::get('paneladmin/usuario', function () {
+        return view('administrador/usuario/index');
+    })->middleware(['has.role:administrador_sistema']);
+
+    Route::resource('api/usuario', 'UserController')->middleware(['has.role:administrador_sistema']);
+
 
     //Obra
     Route::get('paneladmin/obra', function () {
         return view('administrador/obra/index');
     })->middleware(['has.role:administrador_sistema']);
 
+    Route::get('obra/{obra}', 'ObraController@ver')->name('obra.ver')->middleware('has.role:administrador_sistema');
     Route::resource('api/obra', 'ObraController')->middleware(['has.role:administrador_sistema']);
+   
 
     //Empresas
     Route::get('paneladmin/empresa', function () {
         return view('administrador/empresa/index');
     })->middleware(['has.role:administrador_sistema']);
 
+    Route::get('empresa/{empresa}', 'EmpresaController@ver')->name('empresa.ver')->middleware('has.role:administrador_sistema');
     Route::resource('api/empresa', 'EmpresaController');
 
 
@@ -109,6 +122,8 @@ Route::middleware(['auth'])->group(function(){
 
     Route::resource('api/persona', 'PersonaController');
 
+    //Subcontratacion
+    Route::post('subcontratacion/store', 'SubcontratacionController@store')->name('subcontratacion.store')->middleware('has.role:administrador_sistema');
 
     //Roles
     Route::get('paneladmin/rol', function () {

@@ -1,10 +1,10 @@
 
-{{-- MODAL ELIMINACION DE TRABAJADORES --}}
-  <div class="modal fade" id="modal-eliminaTrabajador">
+{{-- MODAL ELIMINACION DE USUARIOS --}}
+  <div class="modal fade" id="modal-eliminaUsuario">
     <div class="modal-dialog">
       <div class="modal-content bg-danger">
         <div class="modal-header">
-          <h4 class="modal-title">¡Atención! vas a eliminar la trabajador:</h4>
+          <h4 class="modal-title">¡Atención! vas a eliminar la usuario:</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -24,20 +24,20 @@
         </div>        
       </div><!-- /.modal-content -->      
     </div><!-- /.modal-dialog -->    
-  </div>{{--fin MODAL ELIMINACION DE OBRAS --}}
+  </div>{{--fin MODAL ELIMINACION DE USUARIOS --}}
     
-{{-- MODAL CREA TRABAJADORES --}}
-  <div class="modal fade" id="modal-nuevoTrabajador">
+{{-- MODAL CREA USUARIOS --}}
+  <div class="modal fade" id="modal-nuevoUsuario">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Crear un trabajador nuevo</h4>
+          <h4 class="modal-title">Crear un usuario nuevo</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
   
-        <form action="{{route('persona.store')}}" method="POST" id="creaTrabajadorForm">
+        <form action="{{route('persona.store')}}" method="POST" id="creaUsuarioForm">
           @csrf 
           <div class="modal-body">
                         
@@ -70,20 +70,20 @@
       </div><!-- /.modal-content -->      
     </div><!-- /.modal-dialog -->    
   </div>
-{{--fin MODAL CREA OBRA --}}
+{{--fin MODAL CREA USUARIO --}}
   
-{{-- MODAL EDITA TRABAJADORES --}}
-  <div class="modal fade" id="modal-editTrabajador">
+{{-- MODAL EDITA USUARIOS --}}
+  <div class="modal fade" id="modal-editUsuario">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Edita el trabajador</h4>
+          <h4 class="modal-title">Edita el usuario</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
   
-        <form action="" method="POST" id="updateTrabajadorForm">
+        <form action="" method="POST" id="updateUsuarioForm">
           @method('put')
           @csrf 
           <div class="modal-body">
@@ -94,19 +94,31 @@
             </div> 
   
             <div class="form-group">
-              <label for="direccion">Apellidos</label>
-              <input class="form-control" id="edit_apellidos" type="text" name="apellidos">
+              <label for="direccion">Email</label>
+              <input class="form-control" id="edit_email" type="text" name="email">
             </div>
-            
-            <div class="form-group">
-              <label for="direccion">Dni o Nie</label>
-              <input class="form-control" id="edit_dni" type="text"  name="dni">
-            </div>              
-  
-            <div class="form-group">              
-                <label for="inicio_previsto">Fecha de nacimiento</label>
-                <input class="form-control" id="edit_fecha_nacimiento" type="date" name="fecha_nacimiento">   
-            </div> 
+
+            <div class="form-group card">
+              <div class="card-header">
+                <h3 class="card-title">Roles asignados</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Check</th>
+                      <th>Nombre</th>                      
+                      <th>Descripcion</th>                        
+                    </tr>
+                  </thead>
+                  <tbody id="edit_tablaRoles">
+                    {{-- aqui se inserta de forma dinamica la tabla --}}
+                  </tbody>
+                </table>
+              </div> <!-- /.card-body -->               
+            </div>      
+           
           </div>          
         
           <div class="modal-footer justify-content-between">
@@ -118,4 +130,4 @@
 
       </div><!-- /.modal-content -->      
     </div> <!-- /.modal-dialog -->   
-  </div>{{--fin MODAL EDITA OBRA --}}
+  </div>{{--fin MODAL EDITA USUARIO --}}

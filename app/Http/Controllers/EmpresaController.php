@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Empresa;
+use App\Contrato;
 use Illuminate\Http\Request;
 
 class EmpresaController extends Controller
@@ -17,8 +18,7 @@ class EmpresaController extends Controller
         $empresas = Empresa::with('localidad');        
         
         return datatables()
-        ->eloquent($empresas)
-        /* ->editColumn('localidad_id', function($empresas){return $empresas->localidad->nombre;}) */
+        ->eloquent($empresas)        
         ->editColumn('localidad_id', function($empresas){return $empresas->localidad->nombre;})
         ->addColumn('columna_botones','administrador\empresa\partials\botonesDT')
         ->rawColumns(['columna_botones'])
@@ -120,4 +120,34 @@ class EmpresaController extends Controller
         ); 
         return back()->with($notification);
     }
+
+    /**
+     * Devuelve la vista empresa.
+     *
+     * @param  \App\Empresa  $empresa
+     * @return \Illuminate\Http\Response
+     */
+    public function ver(Empresa $empresa)
+    {
+       
+        //$contratos = Contrato::where( 'empresa_id', '=', $empresa->id)->get();
+        $contratos = Contrato::where( 'empresa_id', '=', $empresa->id)->with('estadoLaboral','persona')->get();
+       // dd($contratos);
+        $trabajadores=collect([]);
+         
+        foreach ($contratos as $contrato) {
+            //dd($contrato);
+            if ($contrato->estadoLaboral->last() && $contrato->estadoLaboral->last()->estado != 'baja' ) {
+                
+                $trabajadores->push($contrato->persona);
+            }            
+        }
+
+        //dd($trabajadores);
+        return view('administrador.empresa.ver',[
+            'empresa' => $empresa,
+            'trabajadores' =>  $trabajadores
+        ]);
+    }
+
 }

@@ -91,7 +91,6 @@
             },                      
         }); /* fin DATATABLE */  
 
-
          //Initialize Select2 Elements
         $('#selec2Promotor').select2({
             theme: 'bootstrap4',
@@ -214,12 +213,6 @@
         }); 
             
     }
-
-   
-    
-   
-    
-    
      
     function eliminaEmpresa(id,nombre){
         //console.log('elimina una obra'+id)
@@ -234,6 +227,7 @@
         $("#cuerpoDescripcion").text(descripcion);                               
 
     }
+
     function formSubmit()    {               
         $("#deleteForm").submit();
     }
@@ -241,7 +235,6 @@
     function formSubmit()    {               
         $("#creaEmpresaForm").submit();
     }
-
 
 
     /* Este codigo impide que el form se envie automaticamente si pulsamos Enter */

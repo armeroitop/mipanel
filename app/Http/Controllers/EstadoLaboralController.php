@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Subcontratacion;
+use App\EstadoLaboral;
 use Illuminate\Http\Request;
 
-class SubcontratacionController extends Controller
+class EstadoLaboralController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,31 +35,16 @@ class SubcontratacionController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $subcontratacion = new Subcontratacion();        
-        $subcontratacion->orden = $request->orden;
-        $subcontratacion->nivel = $request->nivel+1;
-        $subcontratacion->contratante_id = $request->contratante_id;
-        $subcontratacion->contratado_id = $request->contratado_id;
-        $subcontratacion->obra_id = $request->obra_id;
-        $subcontratacion->save();
-
-        $notification = array(
-            'message' => 'la subcontratación' ,
-            'titulo' => 'Se ha registrado',
-            'alert-type' => 'success'
-        );       
-        return back()->with($notification);
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Subcontratacion  $subcontratacion
+     * @param  \App\EstadoLaboral  $estadoLaboral
      * @return \Illuminate\Http\Response
      */
-    public function show(Subcontratacion $subcontratacion)
+    public function show(EstadoLaboral $estadoLaboral)
     {
         //
     }
@@ -67,10 +52,10 @@ class SubcontratacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Subcontratacion  $subcontratacion
+     * @param  \App\EstadoLaboral  $estadoLaboral
      * @return \Illuminate\Http\Response
      */
-    public function edit(Subcontratacion $subcontratacion)
+    public function edit(EstadoLaboral $estadoLaboral)
     {
         //
     }
@@ -79,10 +64,10 @@ class SubcontratacionController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Subcontratacion  $subcontratacion
+     * @param  \App\EstadoLaboral  $estadoLaboral
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subcontratacion $subcontratacion)
+    public function update(Request $request, EstadoLaboral $estadoLaboral)
     {
         //
     }
@@ -90,10 +75,10 @@ class SubcontratacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Subcontratacion  $subcontratacion
+     * @param  \App\EstadoLaboral  $estadoLaboral
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Subcontratacion $subcontratacion)
+    public function destroy(EstadoLaboral $estadoLaboral)
     {
         //
     }

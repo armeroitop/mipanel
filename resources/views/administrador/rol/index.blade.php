@@ -143,7 +143,7 @@
 
         var rutaEditRol = '{{ route("rol.edit", ":id") }}';
         rutaEditRol = rutaEditRol.replace(':id', id);
-        console.log(rutaEditRol); 
+        //console.log(rutaEditRol); 
         $.ajax({
            type: 'GET',
            url: rutaEditRol ,            
@@ -168,7 +168,7 @@
             
 
             $('#edit_tablaPermisos').empty();
-            console.log(data[2]); 
+            //console.log(data[2]); 
             data[1].forEach(element => {
                 if(data[0].includes(element.id)){
                     $('#edit_tablaPermisos').append('<tr>\
