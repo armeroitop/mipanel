@@ -61,7 +61,7 @@
       </li>
 
       {{-- Usuarios --}}
-      <li class="nav-item has-treeview menu-closed">
+      {{-- <li class="nav-item has-treeview menu-closed">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-user-astronaut"></i>
           <p>
@@ -83,10 +83,10 @@
             </a>
           </li>
         </ul>
-      </li>
+      </li> --}}
 
       {{-- Roles --}}
-      <li class="nav-item has-treeview menu-closed">
+      {{-- <li class="nav-item has-treeview menu-closed">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-project-diagram"></i>
           <p>
@@ -108,7 +108,7 @@
             </a>
           </li>
         </ul>
-      </li>
+      </li> --}}
 
       <li class="nav-item">
         <a href="#" class="nav-link">

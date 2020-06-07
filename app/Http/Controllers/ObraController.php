@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Obra;
 use App\Subcontratacion;
+use App\Contrato;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -197,25 +198,39 @@ class ObraController extends Controller
                                              'subcontrataciones' => $subcontrataciones
                                             ]); 
     }
-
+    //TODO terminar metodo
     //Devuelve las obras en las que este cliente participa
     public function obraCliente(){
 
-        //TODO terminar metodo
+        
         //Obtener las empresas en las que esta contratado el usuario
         $usuario = Auth::user();
         $persona = $usuario->persona()->get()->last();
-        $empresas = $persona->empresa()->get();
-        
+
+        //$empresas = $persona->empresa()->get();//FIXME no se esta consultando que el trabajador este activo
+        //$empresas = $persona->empresa()->get();
+       
+        $contratos = Contrato::where( 'persona_id', '=', $persona->id)->with('estadoLaboral','persona','empresa')->get();
+        $empresas = collect([]);
+        foreach ($contratos as $contrato) {
+            if($contrato->estadoLaboral->last()->estado == 'alta'){
+                //dd($contrato->empresa);
+                $empresas->push($contrato->empresa);
+            }
+        }
+        //dd($empresas);
+       
+
         foreach($empresas as $empresa){
             $empresa->subcontrataciones;
             foreach($empresa->subcontrataciones as $subcontratacion){
                 $subcontratacion->obra;
+                $subcontratacion->contratante;
             }
         }
         //FIXME el metodo devuelve obras repetidas ¿es necesario que esten repetidas?
         //dd($empresas);
-        return view('cliente.empresa.ver',['empresas' => $empresas]); 
+        return view('cliente.obra.ver',['empresas' => $empresas]); 
 
         //Obtener las obras activas en las que participan las empresas obtenidas anteriormente
 

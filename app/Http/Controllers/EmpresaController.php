@@ -129,16 +129,18 @@ class EmpresaController extends Controller
      */
     public function ver(Empresa $empresa)
     {
-       
-        //$contratos = Contrato::where( 'empresa_id', '=', $empresa->id)->get();
+        //Traemos los contratos que tiene esta empresa
         $contratos = Contrato::where( 'empresa_id', '=', $empresa->id)->with('estadoLaboral','persona')->get();
-       // dd($contratos);
+        
+        //dd($contratos);
+
+        //Creamos unos contenedores
         $trabajadores = collect([]);
         $contratosID = collect([]);
          
         foreach ($contratos as $contrato) {
-            //dd($contrato);
-            if ($contrato->estadoLaboral->last() && $contrato->estadoLaboral->last()->estado != 'baja' ) {                
+            //dd($contrato);                           
+            if ($contrato->estadoLaboral->last() && $contrato->estadoLaboral->last()->estado == 'alta' ) {                
                
                 $trabajadores->push($contrato->persona);
                 $contratosID->push($contrato->id);               

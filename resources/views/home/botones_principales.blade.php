@@ -5,7 +5,7 @@
     <h4 class="card-title">
         <a href="#">Mi empresa</a>
     </h4>
-    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+    <p class="card-text">Aquí encontraras los documentos de tu empresa que debes subir</p>
     </div>
 </div>
 </div>
@@ -17,7 +17,7 @@
     <h4 class="card-title">
         <a href="#">Mis obras</a>
     </h4>
-    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+    <p class="card-text">Aquí encontratas todas las obras en la que tu empresa está participando</p>
     </div>
 </div>
 </div>
