@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Persona;
+use App\Empresa;
+use App\Contrato;
 use Caffeinated\Shinobi\Models\Role;
 use Illuminate\Http\Request;
 
@@ -43,6 +45,7 @@ class PersonaController extends Controller
     {
         //dd($request->all());
         $persona = new Persona($request->all());
+        $persona->dni = preg_replace('/[^0-9a-zA-Z_]/', '', $request->dni); # Strip all whitespaces
         $persona->save();
 
         $notification = array(
@@ -54,13 +57,15 @@ class PersonaController extends Controller
         return back()->with($notification);
     }
 
+    
+
     /**
      * Display the specified resource.
      *
      * @param  \App\Persona  $persona
      * @return \Illuminate\Http\Response
      */
-    public function show(Persona $persona)
+    public function show(Persona $persona) 
     {
         //
     }

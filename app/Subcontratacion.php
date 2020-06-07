@@ -24,4 +24,8 @@ class Subcontratacion extends Model
 
         return $this->belongsTo('App\Empresa','contratado_id');
     }
+
+    public function obra(){
+        return $this->belongsTo('App\Obra');
+    }
 }

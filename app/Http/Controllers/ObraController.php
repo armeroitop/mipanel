@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Obra;
 use App\Subcontratacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ObraController extends Controller
 {
@@ -56,7 +57,7 @@ class ObraController extends Controller
         $obra->save(); //falta meter la asignación del promotor.
 
         $subcontratacion = new Subcontratacion($request->all());
-        $subcontratacion->orden = -1;
+        $subcontratacion->orden = $subcontratacion->id;
         $subcontratacion->nivel = -1;
         $subcontratacion->contratante_id = $request->promotor;
         $subcontratacion->contratado_id = $request->promotor;
@@ -128,10 +129,24 @@ class ObraController extends Controller
         
         if($request->promotor != 'null' && $request->promotor != ''){
             $subcontratacion = $obra->subcontratacion()->where('nivel', -1)->first();
-            $subcontratacion->update([
-                'contratante_id' =>  $request->promotor,
-                'contratado_id'  =>  $request->promotor
-            ]);            
+
+            if ($subcontratacion) {
+
+                $subcontratacion->update([
+                    'contratante_id' =>  $request->promotor,
+                    'contratado_id'  =>  $request->promotor
+                ]);
+
+            }else{
+                //dd($request->all());
+                $subcontratacion = new Subcontratacion($request->all());
+                $subcontratacion->orden = $subcontratacion->id;
+                $subcontratacion->nivel = -1;
+                $subcontratacion->contratante_id = $request->promotor;
+                $subcontratacion->contratado_id = $request->promotor;
+                $subcontratacion->obra_id = $obra->id;
+                $subcontratacion->save();
+            }                        
         }      
         
 
@@ -164,13 +179,10 @@ class ObraController extends Controller
 
     public function ver(Obra $obra)
     {
-        //dd($obra);
         $localidad = $obra->localidad;
         if ($localidad) {
             $localidad->provincia;
-        }
-        
-       
+        }               
         $promotor = $obra->subcontratacion()->where('nivel', -1)->first();
         if($promotor){
             $promotor->contratante;
@@ -179,14 +191,34 @@ class ObraController extends Controller
         $subcontrataciones = $obra->subcontratacion()->with(['contratado'])->get();
         //$subcontrataciones->contratado;
 
-        return view('administrador.obra.ver',['obra'      => $obra,
-                                                    'localidad' => $localidad,
-                                                    'promotor' => $promotor,
-                                                    'subcontrataciones' => $subcontrataciones
-                                                    ]); 
-                                                            
-
+        return view('administrador.obra.ver',['obra'        => $obra,
+                                             'localidad'    => $localidad,
+                                             'promotor'     => $promotor,
+                                             'subcontrataciones' => $subcontrataciones
+                                            ]); 
     }
 
+    //Devuelve las obras en las que este cliente participa
+    public function obraCliente(){
+
+        //TODO terminar metodo
+        //Obtener las empresas en las que esta contratado el usuario
+        $usuario = Auth::user();
+        $persona = $usuario->persona()->get()->last();
+        $empresas = $persona->empresa()->get();
+        
+        foreach($empresas as $empresa){
+            $empresa->subcontrataciones;
+            foreach($empresa->subcontrataciones as $subcontratacion){
+                $subcontratacion->obra;
+            }
+        }
+        //FIXME el metodo devuelve obras repetidas ¿es necesario que esten repetidas?
+        //dd($empresas);
+        return view('cliente.empresa.ver',['empresas' => $empresas]); 
+
+        //Obtener las obras activas en las que participan las empresas obtenidas anteriormente
+
+    }
 
 }

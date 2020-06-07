@@ -28,6 +28,12 @@ class Empresa extends Model
             ->withTimestamps();
     }
 
+    // tiene subcontrataciones
+    public function subcontrataciones()
+    {
+        return $this->hasMany('App\Subcontratacion','contratado_id');
+    }
+
 
     // tiene trabajadores con estado baja
     

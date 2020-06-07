@@ -14,7 +14,7 @@
       <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">DataTable </h3>
+                <h3 class="card-title">Listado de roles </h3>
                 <button type="button" class="btn btn-success float-sm-right" data-toggle="modal" data-target="#modal-nuevoRol" onclick="cargaPermisos()">
                     nuevo Rol
                 </button>                

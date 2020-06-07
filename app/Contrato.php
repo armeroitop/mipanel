@@ -14,7 +14,6 @@ class Contrato extends Model
     
     public function estadoLaboral()
     {
-        //return $this->belongsToMany('App\EstadoLaboral')->withPivot('fecha')->withTimestamps();
         
         return $this->belongsToMany('App\EstadoLaboral','contrato_estado_laboral','contrato_id','estado_laboral_id')->withTimestamps();
     }

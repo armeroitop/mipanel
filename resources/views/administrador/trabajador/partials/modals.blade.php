@@ -24,9 +24,9 @@
         </div>        
       </div><!-- /.modal-content -->      
     </div><!-- /.modal-dialog -->    
-  </div>{{--fin MODAL ELIMINACION DE OBRAS --}}
+  </div>{{--fin MODAL ELIMINACION DE TRABAJADORES --}}
     
-{{-- MODAL CREA TRABAJADORES --}}
+{{-- MODAL CREA TRABAJADOR --}}
   <div class="modal fade" id="modal-nuevoTrabajador">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -69,10 +69,9 @@
         </form>  
       </div><!-- /.modal-content -->      
     </div><!-- /.modal-dialog -->    
-  </div>
-{{--fin MODAL CREA OBRA --}}
+  </div>{{--fin MODAL CREA TRABAJADOR --}}
   
-{{-- MODAL EDITA TRABAJADORES --}}
+{{-- MODAL EDITA TRABAJADOR --}}
   <div class="modal fade" id="modal-editTrabajador">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -118,4 +117,86 @@
 
       </div><!-- /.modal-content -->      
     </div> <!-- /.modal-dialog -->   
-  </div>{{--fin MODAL EDITA OBRA --}}
+  </div>{{--fin MODAL EDITA TRABAJADOR --}}
+
+{{-- MODAL DAR ALTA A TRABAJADOR --}}
+<div class="modal fade" id="modal-altaTrabajador">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Alta de trabajador</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <form action="{{route('contrato.altaTrabajador')}}" method="POST" id="altaTrabajadorForm">
+        @csrf 
+        <div class="modal-body">
+                      
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input class="form-control" id="nombre" type="text" placeholder="escribe aquí el nombre" name="nombre">
+          </div>  
+
+          <div class="form-group">
+            <label for="direccion">Apellidos</label>
+            <input class="form-control" id="apellidos" type="text" placeholder="escribe aquí los apellidos" name="apellidos">
+          </div>
+
+          <div class="form-group">
+            <label for="direccion">Dni o Nie</label>
+            <input class="form-control" id="dni" type="text" placeholder="escribe aquí el dni" name="dni">
+          </div>              
+
+          <div class="form-group">              
+              <label for="inicio_previsto">Fecha de nacimiento</label>
+              <input class="form-control" id="fecha_nacimiento" type="date" name="fecha_nacimiento">   
+          </div>           
+
+          <div class="form-group">              
+              <label for="inicio_previsto">Fecha de alta</label>
+              <input class="form-control" id="fecha_nacimiento" type="date" name="fecha_alta">                 
+          </div> 
+
+          <div >              
+            <input  id="empresa_id" type="hidden"  name="empresa_id">          
+          </div> 
+
+        </div>
+        
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary" data-target="trigger">Guardar</button>
+        </div>
+      </form>  
+    </div><!-- /.modal-content -->      
+  </div><!-- /.modal-dialog -->    
+</div>{{--fin MODAL CREA TRABAJADOR --}}
+
+{{-- MODAL DAR DE BAJA TRABAJADOR --}}
+<div class="modal fade" id="modal-bajaTrabajador">
+  <div class="modal-dialog">
+    <div class="modal-content bg-danger">
+      <div class="modal-header">
+        <h4 class="modal-title">¡Atención! vas a dar de baja al trabajador:</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body" id="cuertpoTextoBAJA"> </div>
+      <p class="modal-body" id="cuerpoDescripcionBAJA"></p>
+
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+
+          <form action="" method="POST" id="bajaTrabajadorForm" >        
+            @method('PUT')
+            @csrf  
+            <button class="btn btn-outline-light" id="boton_eliminar"  data-target="trigger" type="submit" onclick="formSubmit()" >Eliminar</button>
+          </form>
+      </div>        
+    </div><!-- /.modal-content -->      
+  </div><!-- /.modal-dialog -->    
+</div>{{--fin MODAL DE BAJA TRABAJADOR --}}

@@ -29,7 +29,10 @@ class Persona extends Model
 
     public function empresa()
     {
-        return $this->belongsToMany('App\Empresa','contratos','persona_id','empresa_id')->withTimestamps();
+        return $this->belongsToMany('App\Empresa','contratos','persona_id','empresa_id')->withPivot('id')->withTimestamps();
+        /* return $this->belongsToMany('App\Empresa','contratos','persona_id','empresa_id')->withTimestamps(); */
     }
+
+   
 
 }

@@ -160,6 +160,7 @@ class UserController extends Controller
             }else{
                 $user->update([
                     'persona_id' =>  $persona_existente->id,
+                    'name' => $request->nombre,
                 ]);
                 return back()->with('info','Enhorabuena, te has registrado correctamente');
             }
@@ -168,7 +169,8 @@ class UserController extends Controller
             $persona_nueva = Persona::create($request->all());
             
             $user->update([
-                'persona_id' =>  $persona_nueva->id
+                'persona_id' =>  $persona_nueva->id,
+                'name' => $request->nombre,
             ]);
             return back()->with('info','Enhorabuena, te has registrado correctamente');
         }               
