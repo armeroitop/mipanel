@@ -6,6 +6,7 @@ use App\Persona;
 use App\Empresa;
 use App\Contrato;
 use Caffeinated\Shinobi\Models\Role;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class PersonaController extends Controller
@@ -120,5 +121,44 @@ class PersonaController extends Controller
         
         return back()->with($notification);
 
+    }
+
+    public function personaCliente(){
+        //Obtener las empresas en las que esta contratado el usuario
+        $usuario = Auth::user();
+        $persona = $usuario->persona()->get()->last();
+
+        //$empresas = $persona->empresa()->get();//FIXME no se esta consultando que el trabajador este activo
+        //$empresas = $persona->empresa()->get();
+
+        $contratos = Contrato::where( 'persona_id', '=', $persona->id)->with('estadoLaboral','persona','empresa')->get();
+        $empresas = collect([]);
+
+        foreach ($contratos as $contrato) {
+            if($contrato->estadoLaboral->last()->estado == 'alta'){
+                //dd($contrato->empresa);
+                $empresas->push($contrato->empresa);
+            }
+        }
+       
+        $trabajadores = collect([]);
+        $contratosID = collect([]);
+        foreach($empresas as $empresa){
+            //Traemos los contratos que tiene esta empresa
+            $contratos = Contrato::where( 'empresa_id', '=', $empresa->id)->with('estadoLaboral','persona')->get();
+            foreach ($contratos as $contrato) {
+                if ($contrato->estadoLaboral->last() && $contrato->estadoLaboral->last()->estado == 'alta' ) { 
+                    $trabajadores->push($contrato->persona);
+                    $contratosID->push($empresa->id );
+                }
+            }
+        }
+        //dd( $trabajadores,$contratosID);
+
+        return view('cliente.trabajador.index',[
+            'contratos' => $contratosID,
+            'empresas' => $empresas,
+            'trabajadores' =>  $trabajadores
+        ]);
     }
 }

@@ -198,7 +198,7 @@ class ObraController extends Controller
                                              'subcontrataciones' => $subcontrataciones
                                             ]); 
     }
-    //TODO terminar metodo
+    
     //Devuelve las obras en las que este cliente participa
     public function obraCliente(){
 
@@ -206,9 +206,7 @@ class ObraController extends Controller
         //Obtener las empresas en las que esta contratado el usuario
         $usuario = Auth::user();
         $persona = $usuario->persona()->get()->last();
-
-        //$empresas = $persona->empresa()->get();//FIXME no se esta consultando que el trabajador este activo
-        //$empresas = $persona->empresa()->get();
+       
        
         $contratos = Contrato::where( 'persona_id', '=', $persona->id)->with('estadoLaboral','persona','empresa')->get();
         $empresas = collect([]);

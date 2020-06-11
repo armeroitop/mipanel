@@ -96,7 +96,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('paneladmin/trabajador', function () {
         return view('administrador/trabajador/index');
     })->middleware(['has.role:administrador_sistema']);
-
+    Route::get('cliente/persona', 'PersonaController@personaCliente')->name('persona.cliente');
     Route::resource('api/persona', 'PersonaController');
     
 

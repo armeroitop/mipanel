@@ -4,8 +4,8 @@
            with font-awesome or any other icon font library -->
 
       {{-- Obras --}}
-      <li class="nav-item has-treeview menu-closed">
-        <a href="#" class="nav-link">
+      <li class="nav-item has-treeview menu-closed" id="li_Obras">
+        <a href="#" class="nav-link" id="a_Obras">
           <i class="nav-icon fas fa-people-carry"></i>
           <p>
             Obras
@@ -14,7 +14,7 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{url('cliente/obra')}}" class="nav-link">              
+            <a href="{{url('cliente/obra')}}" class="nav-link" id="a_Obras_activas">              
               <i class="fas fa-circle nav-icon"></i>
               <p>Obras activas</p>
             </a>
@@ -46,7 +46,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('paneladmin/trabajador')}}"  class="nav-link">
+            <a href="{{url('cliente/persona')}}"  class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>Trabajador</p>
             </a>
