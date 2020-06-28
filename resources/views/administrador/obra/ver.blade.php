@@ -13,6 +13,7 @@
 
 @section('modals')
     @include('administrador.obra.partials.mod_Ver_Obra')
+    @include('modals.cargo')
 @endsection
 
 @section('content')
@@ -98,10 +99,9 @@
               </h3>
 
               <div class="card-tools">
-                <button class="btn btn-tool" type="button" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                </button>
-                <button class="btn btn-tool" type="button" data-card-widget="remove"><i class="fas fa-times"></i>
-                </button>
+                <button type="button" class="btn btn-success float-sm-right" data-toggle="modal" data-target="#modal-nuevoParticipante">Añadir participante</button>    
+                <button class="btn btn-tool" type="button" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                <button class="btn btn-tool" type="button" data-card-widget="remove"><i class="fas fa-times"></i></button>
               </div>
             </div>
             <!-- /.card-header -->
@@ -111,6 +111,10 @@
                 <div class="col-6">
                   <dl class="row">            
                     <dt class="col-sm-4">Promotor</dt> <dd class="col-sm-8"> @isset($promotor){{ $promotor->contratante->nombre }}@endisset</dd>
+                    @foreach ($participantes as $participante)
+                        <dt class="col-sm-4">{{$participante->cargo->nombre}}</dt><dd class="col-sm-8"> {{$participante->persona->nombre}}  {{$participante->persona->apellidos}}</dd>
+                    @endforeach
+                    
                   </dl>
                 </div>
               </div><!-- /.row -->              
@@ -315,6 +319,62 @@
     $("#obra_id").val(obra_id);
   }
   
-  
+
+  $('#selec2Persona').select2({
+        theme: 'bootstrap4',            
+        placeholder: "Busca una persona",
+        allowClear: true,
+        minimumInputLength: 2, 
+        ajax:{
+            url:"/api/persona/create",
+            type: "GET",
+            dataType: "json",
+            delay: 250,
+            cache: true,
+            data: function (params) {
+                return {
+                    q: params.term, // search term
+                    page: params.page
+                };
+            },
+            processResults: function (data, params) {                    
+                params.page = params.page || 1;
+                return {
+                    results: data,
+                    pagination: {more: (params.page * 10) < data.total_count}                       
+                };    
+            }, 
+        },//fin ajax    
+    });//Fin Selec2 selec2Persona
+
+    $('#selec2Cargo').select2({
+        theme: 'bootstrap4',            
+        placeholder: "Busca un cargo",
+        allowClear: true,
+        minimumInputLength: 0, 
+        ajax:{
+            url:"/api/cargo/create",
+            type: "GET",
+            dataType: "json",
+            delay: 250,
+            cache: true,
+            data: function (params) {
+              
+                return {
+                    q: params.term, // search term
+                    page: params.page
+                };
+            },
+            processResults: function (data, params) {                    
+                params.page = params.page || 1;
+                return {
+                    results: data,
+                    pagination: {more: (params.page * 10) < data.total_count}                       
+                };    
+            }, 
+        },//fin ajax    
+    });//Fin Selec2 selec2Cargo
+
+
 </script>
 @endsection

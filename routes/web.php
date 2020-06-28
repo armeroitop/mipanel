@@ -98,7 +98,10 @@ Route::middleware(['auth'])->group(function(){
     })->middleware(['has.role:administrador_sistema']);
     Route::get('cliente/persona', 'PersonaController@personaCliente')->name('persona.cliente');
     Route::resource('api/persona', 'PersonaController');
-    
+
+    //Cargo
+    Route::post('cargo/asignaCargoParticipante', 'CargoController@asignaCargoParticipante')->name('cargo.asignaCargoParticipante');
+    Route::resource('api/cargo', 'CargoController');
 
     //Contrato
     Route::post('contrato/altaTrabajador', 'ContratoController@altaTrabajador')->name('contrato.altaTrabajador')->middleware('has.role:administrador_sistema');

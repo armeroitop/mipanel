@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cargo;
+use App\Cargoable;
 use Illuminate\Http\Request;
 
 class CargoController extends Controller
@@ -22,9 +23,19 @@ class CargoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $cargos = Cargo::where('nombre','LIKE','%'.$request->q.'%')->get();
+
+        //Formateamos la respuesta para que la lea SELECT2
+        $contenedor = [];      
+        
+        foreach ($cargos as $cargo) {
+                       
+            $contenedor[]= ['id' => $cargo->id, 'text' => $cargo->nombre];            
+        }
+      
+       return response()->json($contenedor);
     }
 
     /**
@@ -82,4 +93,31 @@ class CargoController extends Controller
     {
         //
     }
+
+    /**
+     * Guarda un cargo para una persona en una obra.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function asignaCargoParticipante(Request $request)
+    {
+        $cargoable = new Cargoable($request->all());
+        $cargoable->cargoable_type = 'App\Obra';
+        $cargoable->cargoable_id = $request->obra_id;
+        $cargoable->save();
+
+        $notification = array(
+            'message' => 'el participante ' ,
+            'titulo' => 'Se ha guardado',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
+
+        //dd($cargoable);
+    }
+
+
+
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Obra;
 use App\Subcontratacion;
 use App\Contrato;
+use App\Cargoable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -192,9 +193,20 @@ class ObraController extends Controller
         $subcontrataciones = $obra->subcontratacion()->with(['contratado'])->get();
         //$subcontrataciones->contratado;
 
+        //TODO devolver los participantes de esta obra
+        $obra->cargos;
+        $participantes = Cargoable::where([
+                                            ['cargoable_id', '=', $obra->id ],
+                                            ['cargoable_type', '=', 'App\Obra'] 
+                                        ])->with(['persona','cargo'])->get();
+                                     
+       
+        //dd($participantes);
+
         return view('administrador.obra.ver',['obra'        => $obra,
                                              'localidad'    => $localidad,
                                              'promotor'     => $promotor,
+                                             'participantes' => $participantes,
                                              'subcontrataciones' => $subcontrataciones
                                             ]); 
     }
@@ -216,8 +228,7 @@ class ObraController extends Controller
                 $empresas->push($contrato->empresa);
             }
         }
-        //dd($empresas);
-       
+        //dd($empresas);       
 
         foreach($empresas as $empresa){
             $empresa->subcontrataciones;
@@ -226,12 +237,9 @@ class ObraController extends Controller
                 $subcontratacion->contratante;
             }
         }
-        //FIXME el metodo devuelve obras repetidas ¿es necesario que esten repetidas?
+       
         //dd($empresas);
         return view('cliente.obra.ver',['empresas' => $empresas]); 
-
-        //Obtener las obras activas en las que participan las empresas obtenidas anteriormente
-
     }
 
 }

@@ -27,13 +27,29 @@ class PersonaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Realiza la busqueda de persona mediante Select2.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $campos = ['nombre', 'apellidos', 'dni'];
+        $searchQuery = trim($request->query('q'));
+
+        //FIXME Estaria bien que pudiera buscar la persona por nombre mas los apellidos. Actualmente o buscas por nombre o por apellido
+        $personas = Persona::where(function($q) use($campos, $searchQuery) {
+            foreach ($campos as $campo)
+               $q->orWhere($campo, 'like', "%{$searchQuery}%");
+        })->get();
+
+        foreach ($personas as $persona) {
+                     
+            $contenedor[]= ['id' => $persona->id, 'text' => [$persona->nombre.' '.$persona->apellidos.' (Dni: '.$persona->dni.')']];            
+        }
+      
+       return response()->json($contenedor);
+
+        dd($personas);
     }
 
     /**

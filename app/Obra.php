@@ -30,5 +30,8 @@ class Obra extends Model
 
     // pertenece a una provincia a traves de localidad
 
-
+    public function cargos()
+    {
+        return $this->morphToMany(Cargo::class,'cargoable');
+    }
 }
