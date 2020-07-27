@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Cargo;
 use App\Obra;
 use App\Subcontratacion;
 use App\Contrato;
 use App\Cargoable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class ObraController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Devuelve todas las obras del sistema, en un datatable.
      *
      * @return \Illuminate\Http\Response
      */
@@ -23,6 +25,60 @@ class ObraController extends Controller
         ->addColumn('columna_botones','administrador\obra\partials\botonesDT')
         ->rawColumns(['columna_botones'])
         ->toJson();        
+    }
+
+    //Devuelve las obras en las que este css participa
+    public function indexObraCss(){
+        
+        //Obtener las empresas en las que esta contratado el usuario
+        $usuario = Auth::user();
+        $persona = $usuario->persona()->get()->last();  
+        $cargo = Cargo::where('nombre', '=', 'Coordinador de seguridad y salud')->get()->last();
+       
+
+       
+        $obrasCSS = Cargoable::where([
+                                        ['cargo_id', '=', $cargo->id ],
+                                        ['persona_id', '=', $persona->id ],
+                                        ['cargoable_type', '=', 'App\Obra'] 
+                                    ])->get();
+
+        $obras = collect([]);
+        foreach ($obrasCSS as $obraCSS) {
+            $obras->push($obraCSS->obra);            
+        };
+       
+        
+        return view('coordinador.obra.index',['obras' => $obras]); 
+    }
+
+
+    //Devuelve las obras en las que este cliente participa
+    public function indexObraCliente(){
+        
+        //Obtener las empresas en las que esta contratado el usuario
+        $usuario = Auth::user();
+        $persona = $usuario->persona()->get()->last();       
+       
+        $contratos = Contrato::where( 'persona_id', '=', $persona->id)->with('estadoLaboral','persona','empresa')->get();
+        $empresas = collect([]);
+        foreach ($contratos as $contrato) {
+            if($contrato->estadoLaboral->last()->estado == 'alta'){
+                //dd($contrato->empresa);
+                $empresas->push($contrato->empresa);
+            }
+        }
+        //dd($empresas);       
+
+        foreach($empresas as $empresa){
+            $empresa->subcontrataciones;
+            foreach($empresa->subcontrataciones as $subcontratacion){
+                $subcontratacion->obra;
+                $subcontratacion->contratante;
+            }
+        }       
+        //dd($empresas);
+        return view('cliente.obra.ver',['empresas' => $empresas]); 
     }
 
     /**
@@ -41,8 +97,7 @@ class ObraController extends Controller
             $formateado_obra[]= ['id' => $res->id, 'text' => $res->nombre];
         }
       
-       return response()->json($formateado_obra);
-       
+       return response()->json($formateado_obra);       
     }
 
     /**
@@ -182,13 +237,12 @@ class ObraController extends Controller
     public function ver(Obra $obra)
     {
         $localidad = $obra->localidad;
-        if ($localidad) {
-            $localidad->provincia;
-        }               
+
+        if ($localidad) {$localidad->provincia;}    
+
         $promotor = $obra->subcontratacion()->where('nivel', -1)->first();
-        if($promotor){
-            $promotor->contratante;
-        }
+
+        if($promotor){$promotor->contratante;}
 
         $subcontrataciones = $obra->subcontratacion()->with(['contratado'])->get();
         //$subcontrataciones->contratado;
@@ -202,6 +256,7 @@ class ObraController extends Controller
                                      
        
         //dd($participantes);
+        \Session::put('currentObra', $obra );
 
         return view('administrador.obra.ver',['obra'        => $obra,
                                              'localidad'    => $localidad,
@@ -211,35 +266,45 @@ class ObraController extends Controller
                                             ]); 
     }
     
-    //Devuelve las obras en las que este cliente participa
-    public function obraCliente(){
 
+    public function verObraCss($id)
+    {
+        //Recibe encriptada la id de la obra - metodo GET
+        $id =  Crypt::decrypt($id);
+        $obra = Obra::find($id);
+
+        $localidad = $obra->localidad;
         
-        //Obtener las empresas en las que esta contratado el usuario
-        $usuario = Auth::user();
-        $persona = $usuario->persona()->get()->last();
-       
-       
-        $contratos = Contrato::where( 'persona_id', '=', $persona->id)->with('estadoLaboral','persona','empresa')->get();
-        $empresas = collect([]);
-        foreach ($contratos as $contrato) {
-            if($contrato->estadoLaboral->last()->estado == 'alta'){
-                //dd($contrato->empresa);
-                $empresas->push($contrato->empresa);
-            }
-        }
-        //dd($empresas);       
 
-        foreach($empresas as $empresa){
-            $empresa->subcontrataciones;
-            foreach($empresa->subcontrataciones as $subcontratacion){
-                $subcontratacion->obra;
-                $subcontratacion->contratante;
-            }
-        }
+        if ($localidad) {$localidad->provincia;}    
+
+        $promotor = $obra->subcontratacion()->where('nivel', -1)->first();
+
+        if($promotor){$promotor->contratante;}
+
+        $subcontrataciones = $obra->subcontratacion()->with(['contratado'])->get();
+        //$subcontrataciones->contratado;
+
+        // devuelve los participantes de esta obra
+        $obra->cargos;
+        $participantes = Cargoable::where([
+                                            ['cargoable_id', '=', $obra->id ],
+                                            ['cargoable_type', '=', 'App\Obra'] 
+                                        ])->with(['persona','cargo'])->get();
+                                     
        
-        //dd($empresas);
-        return view('cliente.obra.ver',['empresas' => $empresas]); 
+        //dd($participantes);
+        \Session::put('currentObra', $obra );
+
+        return view('coordinador.obra.ver',['obra'        => $obra,
+                                             'localidad'    => $localidad,
+                                             'promotor'     => $promotor,
+                                             'participantes' => $participantes,
+                                             'subcontrataciones' => $subcontrataciones
+                                            ]); 
     }
+    
+
+    
 
 }

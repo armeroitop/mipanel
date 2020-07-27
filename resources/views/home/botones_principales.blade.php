@@ -13,7 +13,7 @@
 @can('contratista')
     <div class="col-lg-4 col-sm-6 mb-4">
         <div class="card h-100">
-            <a href="{{url('cliente/obra')}}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="{{route('obra.cliente')}}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
             <h4 class="card-title">
                 <a href="#">Mis obras</a>
@@ -27,10 +27,10 @@
 @can('coordinador_seguridad')
     <div class="col-lg-4 col-sm-6 mb-4">
         <div class="card h-100">
-            <a href="{{url('cliente/obra')}}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+            <a href="{{route('obra.css')}}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
             <h4 class="card-title">
-                <a href="#">Mis obras</a>
+                <a href="#">Mis obras CSS</a>
             </h4>
             <p class="card-text">Aquí encontratas todas las obras en las que realizas la función de Coordinador de seguridad y salud</p>
             </div>

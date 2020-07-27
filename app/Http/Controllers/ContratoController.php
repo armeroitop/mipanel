@@ -116,9 +116,9 @@ class ContratoController extends Controller
                 $persona->empresa()->attach($empresa->id);
                 
                 $contrato = Contrato::where('persona_id', 'like', $persona->id)
-                                ->where('empresa_id', 'like', $empresa->id)
-                                ->get()
-                                ->last();
+                                    ->where('empresa_id', 'like', $empresa->id)
+                                    ->get()
+                                    ->last();
             }
           
             //dar alta  si no tenia ya el alta

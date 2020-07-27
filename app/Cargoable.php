@@ -21,4 +21,10 @@ class Cargoable extends Model
     {        
         return $this->belongsTo('App\Cargo','cargo_id');
     }
+
+    public function obra()
+    {        
+        return $this->belongsTo('App\Obra','cargoable_id');
+    }
+
 }

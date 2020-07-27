@@ -3,19 +3,21 @@
       <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
 
-      {{-- Obras Empresa--}}
-      @can('constructor')
+    
+
+      {{-- Obras CSS--}}
+      @can('coordinador_seguridad') 
       <li class="nav-item has-treeview menu-closed" id="li_Obras">
         <a href="#" class="nav-link" id="a_Obras">
           <i class="nav-icon fas fa-people-carry"></i>
           <p>
-            Obras empresa
+            Obras CSS
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="{{url('cliente/obra')}}" class="nav-link" id="a_Obras_activas">              
+            <a href="{{route('obra.css')}}" class="nav-link" id="a_Obras_activas">              
               <i class="fas fa-circle nav-icon"></i>
               <p>Obras activas</p>
             </a>
@@ -30,32 +32,48 @@
       </li>
       @endcan
 
-      {{-- Obras CSS--}}
-      @can('coordinador_seguridad') 
-      <li class="nav-item has-treeview menu-closed" id="li_Obras">
-        <a href="#" class="nav-link" id="a_Obras">
-          <i class="nav-icon fas fa-people-carry"></i>
+      {{-- Embresas --}}
+      <li class="nav-item has-treeview menu-closed">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-industry"></i>
           <p>
-            Obras CSS
+            Seguimiento
             <i class="right fas fa-angle-left"></i>
           </p>
-        </a>
+        </a>       
+         
         <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="{{url('cliente/obra')}}" class="nav-link" id="a_Obras_activas">              
-              <i class="fas fa-circle nav-icon"></i>
-              <p>Obras activas</p>
-            </a>
-          </li>
+
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
-              <p>Obras inactivas</p>
+              <i class="fa fa-eye nav-icon"></i>
+              <p>Visitas</p>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a href="#"  class="nav-link">
+              <i class="fa fa-users nav-icon"></i>
+              <p>Reuniones</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fa fa-file-alt nav-icon"></i>
+              <p>Informes mensuales</p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="fa fa-bible nav-icon"></i>
+              <p>Libro incidencias</p>
+            </a>
+          </li>
+          
         </ul>
       </li>
-      @endcan
 
       {{-- Embresas --}}
       <li class="nav-item has-treeview menu-closed">

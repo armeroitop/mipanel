@@ -74,7 +74,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('paneladmin/obra', function () {
         return view('administrador/obra/index');
     })->middleware(['has.role:administrador_sistema']);
-    Route::get('cliente/obra', 'ObraController@obraCliente')->name('obra.cliente');
+    Route::get('cliente/obras', 'ObraController@indexObraCliente')->name('obra.cliente');
+
+    Route::get('css/obras', 'ObraController@indexObraCss')->name('obra.css');
+    Route::get('obraCss/{obra}', 'ObraController@verObraCss')->name('obra.css.ver');
+
     Route::get('obra/{obra}', 'ObraController@ver')->name('obra.ver')->middleware('has.role:administrador_sistema');
     Route::resource('api/obra', 'ObraController')->middleware(['has.role:administrador_sistema']);
    

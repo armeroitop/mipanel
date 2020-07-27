@@ -18,8 +18,8 @@ try {
 
     
     require('../../node_modules/admin-lte/plugins/jquery-ui/jquery-ui.js');
-    /* require('../../node_modules/admin-lte/plugins/chart.js/Chart.js');
-    require('../../node_modules/admin-lte/plugins/sparklines/sparkline.js'); */
+    require('../../node_modules/admin-lte/plugins/chart.js/Chart.js');
+    //require('../../node_modules/admin-lte/plugins/sparklines/sparkline.js');
     require('../../node_modules/admin-lte/plugins/jqvmap/jquery.vmap.js');
     require('../../node_modules/admin-lte/plugins/jqvmap/maps/jquery.vmap.usa.js');
     require('../../node_modules/admin-lte/plugins/summernote/summernote.js');
