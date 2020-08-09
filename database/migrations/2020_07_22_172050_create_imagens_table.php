@@ -15,6 +15,12 @@ class CreateImagensTable extends Migration
     {
         Schema::create('imagens', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            //TODO crear los siguientes campos
+            // URL de la foto
+
+            $table->morphs('imagenable');
+            
             $table->timestamps();
         });
     }

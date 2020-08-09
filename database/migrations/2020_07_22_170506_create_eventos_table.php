@@ -15,6 +15,12 @@ class CreateEventosTable extends Migration
     {
         Schema::create('eventos', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            //TODO crear los siguientes campos
+            // fecha
+            // evento_tipo_id 
+            // eventoable   de tipo polimorfico
+            
             $table->timestamps();
         });
     }

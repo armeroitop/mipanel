@@ -15,6 +15,14 @@ class CreateDocumentosTable extends Migration
     {
         Schema::create('documentos', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            
+            //TODO crear los siguientes campos
+            // fecha
+            // documento_tipo_id 
+            // documentoable   de tipo polimorfico
+            // url del documento en pdf?
+
             $table->timestamps();
         });
     }

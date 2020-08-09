@@ -15,6 +15,12 @@ class CreateComentariosTable extends Migration
     {
         Schema::create('comentarios', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            // TODO campos
+            //$table->text('comentario');
+
+            //comentariosable 
+
             $table->timestamps();
         });
     }

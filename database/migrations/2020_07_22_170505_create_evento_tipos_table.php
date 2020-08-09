@@ -15,6 +15,9 @@ class CreateEventoTiposTable extends Migration
     {
         Schema::create('evento_tipos', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->string('tipo',250);
+
             $table->timestamps();
         });
     }
