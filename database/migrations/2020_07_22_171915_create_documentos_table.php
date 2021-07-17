@@ -21,7 +21,7 @@ class CreateDocumentosTable extends Migration
             // fecha
             // documento_tipo_id 
             // documentoable   de tipo polimorfico
-            // url del documento en pdf?
+            // url del documento en pdf?++
 
             $table->timestamps();
         });
