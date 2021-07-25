@@ -10,8 +10,8 @@
     </div>
 </div>
 
-@can('contratista')
-    <div class="col-lg-4 col-sm-6 mb-4">
+@if (auth()->user()->canAtLeast(['users.index', 'users.show']))
+     <div class="col-lg-4 col-sm-6 mb-4">
         <div class="card h-100">
             <a href="{{route('obra.cliente')}}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
             <div class="card-body">
@@ -22,9 +22,12 @@
             </div>
         </div>
     </div>
-@endcan
+@endif
+{{-- @can(['user.index','users.show'])
+   
+@endcan --}}
 
-@can('coordinador_seguridad')
+@can('users.show')
     <div class="col-lg-4 col-sm-6 mb-4">
         <div class="card h-100">
             <a href="{{route('obra.css')}}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
@@ -38,7 +41,8 @@
     </div>
 @endcan
 
-@can('administrador_sistema') 
+
+@can('users.show') 
     <div class="col-lg-4 col-sm-6 mb-4">
         <div class="card h-100">
             <a href="{{url('paneladmin')}}"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>

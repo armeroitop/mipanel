@@ -22,7 +22,7 @@ class UserController extends Controller
         return datatables()
         ->eloquent($user)
         ->editColumn('roles', function($user){return $user->roles->pluck('name')->all();})        
-        ->addColumn('columna_botones','administrador\usuario\partials\botonesDT')
+        ->addColumn('columna_botones','administrador.usuario.partials.botonesDT')
         ->rawColumns(['columna_botones'])
         ->toJson();
     }

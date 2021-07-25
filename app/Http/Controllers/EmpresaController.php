@@ -20,7 +20,10 @@ class EmpresaController extends Controller
         return datatables()
         ->eloquent($empresas)        
         ->editColumn('localidad_id', function($empresas){return $empresas->localidad->nombre;})
-        ->addColumn('columna_botones','administrador\empresa\partials\botonesDT')
+        /* ->addColumn('columna_botones','administrador\empresa\partials\botonesDT') */
+        ->addColumn('columna_botones',function(Empresa $empresa) {                       
+            return view('administrador.empresa.partials.botonesDT', compact('empresa'));
+        })
         ->rawColumns(['columna_botones'])
         ->toJson();
     }

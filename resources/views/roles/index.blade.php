@@ -33,16 +33,14 @@
                                     <td>             {{$role->name}}</td>
                                     <td width="10px">
                                         @can('roles.show')
-                                            <a href="{{route('roles.show', $role->id)}}" 
-                                            class="btn btn-sm btn-outline-primary float-right">
+                                            <a href="{{route('roles.show', $role->id)}}" class="btn btn-sm btn-outline-primary float-right">
                                             Ver
                                             </a>
                                         @endcan
                                     </td>                                    
                                     <td width="10px">
                                         @can('roles.edit')
-                                            <a href="{{route('roles.edit', $role->id)}}" 
-                                            class="btn btn-sm btn-outline-primary float-right">
+                                            <a href="{{route('roles.edit', $role->id)}}" class="btn btn-sm btn-outline-primary float-right">
                                             Editar
                                             </a>
                                         @endcan

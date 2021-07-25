@@ -20,7 +20,10 @@ class PersonaController extends Controller
     {
         return datatables()
         ->eloquent(Persona::query())
-        ->addColumn('columna_botones','administrador\trabajador\partials\botonesDT')
+        ->addColumn('columna_botones','administrador.trabajador.partials.botonesDT')
+        /* ->addColumn('columna_botones',function(Empresa $empresa) {                       
+            return view('administrador.empresa.partials.botonesDT', compact('empresa'));
+        }) */
         ->rawColumns(['columna_botones'])
         ->toJson();  
        
