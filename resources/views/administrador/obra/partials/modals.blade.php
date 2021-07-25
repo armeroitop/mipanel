@@ -48,33 +48,33 @@
           
           <div class="form-group">
             <label for="nombre">Nombre</label>
-            <input class="form-control" id="nombre" type="text" placeholder="Nombre de la obra" name="nombre">
+            <input class="form-control" id="nombre" type="text" placeholder="Nombre de la obra" name="nombre" required="required">
           </div>
 
           <div class="form-group">
             <label>Descripción</label>
-            <textarea class="form-control" id="descripcion" placeholder="Descripción breve de la obra ..." rows="3" name="descripcion"></textarea>
+            <textarea class="form-control" id="descripcion" placeholder="Descripción breve de la obra ..." rows="3" name="descripcion" required="required"></textarea>
           </div>
 
           <div class="form-group">
             <label for="direccion">Dirección</label>
-            <input class="form-control" id="direccion" type="text" placeholder="Calle" name="direccion">
+            <input class="form-control" id="direccion" type="text" placeholder="Calle" name="direccion" required="required">
           </div>
 
           <div class="form-group">
             <label>Localidad</label>
-            <select class="form-control select2" style="width: 100%;" id="selec2Localidad" name="localidad_id"></select>                                  
+            <select class="form-control select2" style="width: 100%;" id="selec2Localidad" name="localidad_id" ></select>                                  
           </div>
 
           <div class="form-group">
             <div class="row">
             <div class="col-md-6">
               <label for="inicio_previsto">Fecha de inicio</label>
-              <input class="form-control" id="inicio_previsto" type="date" placeholder="ej. Murcia" name="inicio_previsto">
+              <input class="form-control" id="inicio_previsto" type="date" placeholder="ej. Murcia" name="inicio_previsto" required="required">
             </div>
             <div class="col-md-6">
               <label for="fin_previsto">Fecha de finalización</label>
-              <input class="form-control" id="fin_previsto" type="date" placeholder="ej. Murcia" name="fin_previsto">
+              <input class="form-control" id="fin_previsto" type="date" placeholder="ej. Murcia" name="fin_previsto" required="required">
             </div></div>
           </div>
 

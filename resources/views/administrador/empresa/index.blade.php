@@ -67,7 +67,7 @@
                 {data: 'columna_botones'},
             ], 
             language: {
-                sprocessing:    "Procesando...",
+                processing:     "Procesando...",
                 search:         "Buscar&nbsp;:",
                 lengthMenu:     "Muestra _MENU_ elementos",
                 info:           "Mostrando del _START_ al _END_; de _TOTAL_ elementos",

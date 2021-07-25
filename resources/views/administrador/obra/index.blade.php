@@ -53,7 +53,11 @@
     <script>                
     //Manipula la DATATABLE
     $(document).ready(function() {
+
+        $.ajaxSetup({headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+
         $('#tablaIndexObra').DataTable({
+            "processing": true,
             "serverSide": true,                    
             "ajax": "{{ url('api/obra') }}", 
             "order": [[ 0, "desc" ]],
@@ -64,10 +68,10 @@
                 {data: 'descripcion'},
                 {data: 'direccion'},
                 {data: 'proyecto'},
-                {data: 'columna_botones'},
+                {data: 'columna_botones', orderable: false, searchable: false},
             ], 
             language: {
-                sprocessing:    "Procesando...",
+                processing:     "Procesando...",
                 search:         "Buscar&nbsp;:",
                 lengthMenu:     "Muestra _MENU_ elementos",
                 info:           "Mostrando del _START_ al _END_; de _TOTAL_ elementos",

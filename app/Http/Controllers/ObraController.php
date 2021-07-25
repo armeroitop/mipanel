@@ -10,6 +10,7 @@ use App\Cargoable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Yajra\DataTables\DataTables;
 
 class ObraController extends Controller
 {
@@ -19,12 +20,20 @@ class ObraController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {        
+    {   
+        $obra = Obra::query(); 
+                 
         return datatables()
-        ->eloquent(Obra::query())
-        ->addColumn('columna_botones','administrador\obra\partials\botonesDT')
-        ->rawColumns(['columna_botones'])
-        ->toJson();        
+            ->eloquent($obra)
+            /* ->addColumn('columna_botones','administrador\obra\partials\botonesDT') */
+            ->addColumn('columna_botones',function(Obra $obra) {       
+                     
+                return view('administrador.obra.partials.boton', compact('obra'));
+            })
+            ->rawColumns(['columna_botones'])
+            ->escapeColumns([])
+            ->make(true);
+            /* ->toJson();   */      
     }
 
     //Devuelve las obras en las que este css participa

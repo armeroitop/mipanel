@@ -96,7 +96,7 @@
         <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1">
           <h1>Mejor control de la seguridad de tu obra</h1>
           <h2>Con nuestra plataforma, tendrás toda la información de tu obra al instante</h2>
-          <a href="#about" class="btn-get-started scrollto">Get Started</a>
+          {{-- <a href="#about" class="btn-get-started scrollto">Get Started</a> --}}
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
           <img src="assets/img/hero-img.svg" class="img-fluid animated" alt="">
@@ -119,18 +119,18 @@
           <div class="col-lg-6 pt-5 pt-lg-0">
             <h3 data-aos="fade-up">Somos un equipo de Coordinadores de seguridad y salud</h3>
             <p data-aos="fade-up" data-aos-delay="100">
-              Todos los coordinadores son, master en prevención de riesgos laborales e ingenieros especializados según su titulación profesional.
+              Somos un equipo de coordinadores, todos con master en prevención de riesgos laborales e ingenieros especializados según titulación profesional.
 Los procedimientos de coordinación de seguridad y salud implantados, imponen la presencia de coordinadores especializados y con formación académica adecuada a cada tipología de obra. Así en nuestra plantilla disponemos de departamentos diferenciados para cubrir los siguientes tipos de obra            </p>
             <div class="row">
               <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <i class="bx bx-receipt"></i>
-                <h4>Corporis voluptates sit</h4>
-                <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
+                <h4>Ingenieros civiles</h4>
+                <p>Contamos con ingenieros civiles, itop y arqutectos en nuestro equipo</p>
               </div>
               <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
                 <i class="bx bx-cube-alt"></i>
-                <h4>Ullamco laboris nisi</h4>
-                <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt</p>
+                <h4>Máster PRL</h4>
+                <p>Todos con formación de Máster PRL y curso CSS de 200h</p>
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@ Los procedimientos de coordinación de seguridad y salud implantados, imponen la
             <div class="icon-box">
               <div class="icon"><i class="bx bxl-dribbble"></i></div>
               <h4 class="title"><a href="">Coordinación de seguridad y salud</a></h4>
-              <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
+              <p class="description">Asumimos las función de Coordinador de seguridad y salud en obra establecida por el Real Decreto 1627/1997</p>
             </div>
           </div>
 
@@ -161,7 +161,7 @@ Los procedimientos de coordinación de seguridad y salud implantados, imponen la
             <div class="icon-box">
               <div class="icon"><i class="bx bx-file"></i></div>
               <h4 class="title"><a href="">Planes de autoprotección</a></h4>
-              <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla</p>
+              <p class="description">Estamos acreditados por la Generalitat de Catalunya para elaborar planes de autoprotección de interes para la protección civil local y de Cataluña</p>
             </div>
           </div>
 
@@ -169,7 +169,7 @@ Los procedimientos de coordinación de seguridad y salud implantados, imponen la
             <div class="icon-box">
               <div class="icon"><i class="bx bx-tachometer"></i></div>
               <h4 class="title"><a href="">PSS y ESS</a></h4>
-              <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim</p>
+              <p class="description">Como expertos en seguridad, elaboramos tu plan de seguridad</p>
             </div>
           </div>
 
@@ -177,7 +177,7 @@ Los procedimientos de coordinación de seguridad y salud implantados, imponen la
             <div class="icon-box">
               <div class="icon"><i class="bx bx-world"></i></div>
               <h4 class="title"><a href="">Asesoramiento técnico</a></h4>
-              <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum</p>
+              <p class="description">Necesitas ayuda en materia de seguridad y salud, podemos ayudarte a resolver tus dudas</p>
             </div>
           </div>
 
@@ -497,28 +497,25 @@ Los procedimientos de coordinación de seguridad y salud implantados, imponen la
       </div>
     </section><!-- End Team Section -->
 
-    <!-- ======= Clients Section ======= -->
+   {{--  <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients section-bg">
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>Clients</h2>
-          <p>They trusted us</p>
+          <h2>Clientes</h2>
+          <p>Ellos confiaron en nosotros</p>
         </div>
 
         <div class="owl-carousel clients-carousel" data-aos="fade-up" data-aos-delay="100">
-          <img src="assets/img/clients/client-1.png" alt="">
-          <img src="assets/img/clients/client-2.png" alt="">
-          <img src="assets/img/clients/client-3.png" alt="">
-          <img src="assets/img/clients/client-4.png" alt="">
-          <img src="assets/img/clients/client-5.png" alt="">
-          <img src="assets/img/clients/client-6.png" alt="">
-          <img src="assets/img/clients/client-7.png" alt="">
-          <img src="assets/img/clients/client-8.png" alt="">
+          <img src="assets/img/clients/adif.png" alt="">
+          <img src="assets/img/clients/sct.png" alt="">
+          <img src="assets/img/clients/bimsa.png" alt="">
+          <img src="assets/img/clients/infraestructures.png" alt="">
+          <img src="assets/img/clients/eci.png" alt="">          
         </div>
 
       </div>
-    </section><!-- End Clients Section -->
+    </section><!-- End Clients Section --> --}}
 
     <!-- ======= Contact Us Section ======= -->
     <section id="contact" class="contact">
@@ -536,7 +533,7 @@ Los procedimientos de coordinación de seguridad y salud implantados, imponen la
               <div class="address">
                 <i class="icofont-google-map"></i>
                 <h4>Donde estamos:</h4>
-                <p>Gran Via de les Corts Catalanes 826, Barcelona</p>
+                <p>Sant Domenec 8, Sant Cugat del Valles, Barcelona</p>
               </div>
 
               <div class="email">
@@ -560,32 +557,32 @@ Los procedimientos de coordinación de seguridad y salud implantados, imponen la
             <form action="forms/contact.php" method="post" role="form" class="php-email-form">
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="name">Your Name</label>
+                  <label for="name">Nombre</label>
                   <input type="text" name="name" class="form-control" id="name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                   <div class="validate"></div>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="name">Your Email</label>
+                  <label for="name">Email</label>
                   <input type="email" class="form-control" name="email" id="email" data-rule="email" data-msg="Please enter a valid email" />
                   <div class="validate"></div>
                 </div>
               </div>
-              <div class="form-group">
+              {{-- <div class="form-group">
                 <label for="name">Subject</label>
                 <input type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
                 <div class="validate"></div>
-              </div>
+              </div> --}}
               <div class="form-group">
-                <label for="name">Message</label>
+                <label for="name">Mensaje</label>
                 <textarea class="form-control" name="message" rows="10" data-rule="required" data-msg="Please write something for us"></textarea>
                 <div class="validate"></div>
               </div>
               <div class="mb-3">
-                <div class="loading">Loading</div>
+                <div class="loading">Enviar</div>
                 <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
-              <div class="text-center"><button type="submit">Send Message</button></div>
+              <div class="text-center"><button type="submit">Enviar mensaje</button></div>
             </form>
           </div>
 
@@ -620,9 +617,9 @@ Los procedimientos de coordinación de seguridad y salud implantados, imponen la
           <div class="col-lg-3 col-md-6 footer-contact" data-aos="fade-up" data-aos-delay="100">
             <h3>PlataformaCSS</h3>
             <p>
-              Gran Via de les Corts Catalanes <br>
-              Barcelana<br>
-              España <br><br>
+                Sant Domenec 8, Sant Cugat del Valles <br>
+                Barcelana<br>
+                España <br><br>
               <strong>Telefono:</strong> +34 675 82 71 66<br>
               <strong>Email:</strong> armeroitop@gmail.com<br>
             </p>
@@ -632,21 +629,19 @@ Los procedimientos de coordinación de seguridad y salud implantados, imponen la
             <h4>Useful Links</h4>
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Acerca de nosotros</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Servicios</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>              
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links" data-aos="fade-up" data-aos-delay="300">
-            <h4>Our Services</h4>
+            <h4>Nuestros Servicios</h4>
             <ul>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Coordinación de seguridad y salud</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Planes de autoprotección</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">PSS y ESS</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Asesoramiento técnico</a></li>              
             </ul>
           </div>
 

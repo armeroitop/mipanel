@@ -10,9 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -74,6 +71,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('paneladmin/obra', function () {
         return view('administrador/obra/index');
     })->middleware(['has.role:administrador_sistema']);
+    
     Route::get('cliente/obras', 'ObraController@indexObraCliente')->name('obra.cliente');
 
     Route::get('css/obras', 'ObraController@indexObraCss')->name('obra.css');
