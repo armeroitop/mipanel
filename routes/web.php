@@ -16,11 +16,9 @@ Route::get('/', function () {
 
 Route::get('/panel', function () {
         return view('admin_panel/admin');
-    });
+});
 
-Route::get('/paneladmin', function () {
-        return view('administrador/index');
-    })->middleware(['auth','has.role:administrador_sistema']);
+
 
 Auth::routes();
 
@@ -30,6 +28,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Routes
 
 Route::middleware(['auth'])->group(function(){
+
+    Route::get('/paneladmin', function () {return view('administrador/index');});
 
     //Roles
     Route::post('roles/store', 'RoleController@store')  ->name('roles.store')           ->middleware('has.permission:roles.create');
