@@ -5,11 +5,11 @@
 @endsection
 
 @section('sidebar_menu')
-    @include('administrador.partials.panel_iz')
+    @include('panel.partials.panel_iz')
 @endsection
 
 @section('modals')
-  @include('administrador.trabajador.partials.modals')
+  @include('panel.trabajador.partials.modals')
 @endsection
 
 @section('content')

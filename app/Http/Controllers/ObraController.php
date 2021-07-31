@@ -28,7 +28,7 @@ class ObraController extends Controller
             /* ->addColumn('columna_botones','administrador\obra\partials\botonesDT') */
             ->addColumn('columna_botones',function(Obra $obra) {       
                      
-                return view('administrador.obra.partials.boton', compact('obra'));
+                return view('panel.obra.partials.boton', compact('obra'));
             })
             ->rawColumns(['columna_botones'])
             ->escapeColumns([])

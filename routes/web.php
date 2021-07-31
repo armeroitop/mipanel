@@ -16,11 +16,9 @@ Route::get('/', function () {
 
 Route::get('/panel', function () {
         return view('admin_panel/admin');
-    });
+});
 
-Route::get('/paneladmin', function () {
-        return view('administrador/index');
-    })->middleware(['auth','has.role:administrador_sistema']);
+
 
 Auth::routes();
 
@@ -31,7 +29,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function(){
 
-    //Roles
+    Route::get('/panel', function () {return view('panel/home');});
+
+ //Roles
     Route::post('roles/store', 'RoleController@store')  ->name('roles.store')           ->middleware('has.permission:roles.create');
     Route::get('roles', 'RoleController@index')         ->name('roles.index')           ->middleware('has.permission:roles.index');
     Route::get('roles/create', 'RoleController@create') ->name('roles.create')          ->middleware('has.permission:roles.create');
@@ -41,7 +41,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('roles/{role}/edit', 'RoleController@edit')->name('roles.edit')          ->middleware('has.permission:roles.edit');
 
 
-    //Products
+ //Products
     Route::post('products/store', 'ProductController@store')->name('products.store')            ->middleware('has.permission:products.create');
     Route::get('products', 'ProductController@index')->name('products.index')                   ->middleware('has.permission:products.index');
     Route::get('products/create', 'ProductController@create')->name('products.create')          ->middleware('has.permission:products.create');
@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit')      ->middleware('has.permission:products.edit');        
 
 
-    //Users  
+ //Users  
     Route::get('users', 'UserController@index')->name('users.index')                            ->middleware('has.permission:users.index');   
     Route::put('users/{user}', 'UserController@update')->name('users.update')                   ->middleware('has.permission:users.edit');
     Route::get('users/{user}', 'UserController@show')->name('users.show')                       ->middleware('has.permission:users.show');
@@ -59,17 +59,17 @@ Route::middleware(['auth'])->group(function(){
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit')                  ->middleware('has.permission:users.edit'); 
     Route::post('users/asignapersona', 'UserController@asignapersona')->name('users.asignapersona');        
 
-    //Usuario
+ //Usuario
     Route::get('paneladmin/usuario', function () {
-        return view('administrador/usuario/index');
+        return view('panel/usuario/index');
     })->middleware(['has.role:administrador_sistema']);
 
     Route::resource('api/usuario', 'UserController')->middleware(['has.role:administrador_sistema']);
 
 
-    //Obra
+ //Obra
     Route::get('paneladmin/obra', function () {
-        return view('administrador/obra/index');
+        return view('panel/obra/index');
     })->middleware(['has.role:administrador_sistema']);
     
     Route::get('cliente/obras', 'ObraController@indexObraCliente')->name('obra.cliente');
@@ -81,47 +81,47 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('api/obra', 'ObraController')->middleware(['has.role:administrador_sistema']);
    
 
-    //Empresas
+ //Empresas
     Route::get('paneladmin/empresa', function () {
-        return view('administrador/empresa/index');
+        return view('panel/empresa/index');
     })->middleware(['has.role:administrador_sistema']);
 
     Route::get('empresa/{empresa}', 'EmpresaController@ver')->name('empresa.ver')->middleware('has.role:administrador_sistema');
     Route::resource('api/empresa', 'EmpresaController');
 
 
-    //Localidades
+ //Localidades
     Route::resource('api/localidad', 'LocalidadController');
 
 
-    //Trabajadores
+ //Trabajadores
     Route::get('paneladmin/trabajador', function () {
-        return view('administrador/trabajador/index');
+        return view('panel/trabajador/index');
     })->middleware(['has.role:administrador_sistema']);
     Route::get('cliente/persona', 'PersonaController@personaCliente')->name('persona.cliente');
     Route::resource('api/persona', 'PersonaController');
 
-    //Cargo
+//Cargo
     Route::post('cargo/asignaCargoParticipante', 'CargoController@asignaCargoParticipante')->name('cargo.asignaCargoParticipante');
     Route::resource('api/cargo', 'CargoController');
 
-    //Contrato
+ //Contrato
     Route::post('contrato/altaTrabajador', 'ContratoController@altaTrabajador')->name('contrato.altaTrabajador')->middleware('has.role:administrador_sistema');
     Route::put('contrato/{contrato}', 'ContratoController@bajaTrabajador')->name('contrato.bajaTrabajador')->middleware('has.role:administrador_sistema');
 
-    //Subcontratacion
+ //Subcontratacion
     Route::post('subcontratacion/store', 'SubcontratacionController@store')->name('subcontratacion.store')->middleware('has.role:administrador_sistema');
 
-    //Roles
+ //Roles
     Route::get('paneladmin/rol', function () {
-        return view('administrador/rol/index');
+        return view('panel/rol/index');
     })->middleware(['has.role:administrador_sistema']);
 
     Route::resource('api/rol', 'RoleController');
 
-    //Permisos
+ //Permisos
     Route::get('paneladmin/permiso', function () {
-        return view('administrador/permiso/index');
+        return view('panel/permiso/index');
     })->middleware(['has.role:administrador_sistema']);
 
     Route::resource('api/permiso', 'PermisoController');
