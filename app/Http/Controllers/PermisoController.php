@@ -17,7 +17,7 @@ class PermisoController extends Controller
     {
         return datatables()
         ->eloquent(Permission::query())
-        ->addColumn('columna_botones','administrador.permiso.partials.botonesDT')
+        ->addColumn('columna_botones','panel.permiso.partials.botonesDT')
         ->rawColumns(['columna_botones'])
         ->toJson(); 
     }

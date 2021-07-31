@@ -17,7 +17,7 @@ class RoleController extends Controller
     {
         return datatables()
         ->eloquent(Role::query())
-        ->addColumn('columna_botones','administrador.rol.partials.botonesDT')
+        ->addColumn('columna_botones','panel.rol.partials.botonesDT')
         ->rawColumns(['columna_botones'])
         ->toJson();     
     }

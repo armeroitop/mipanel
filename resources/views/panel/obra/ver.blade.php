@@ -8,11 +8,11 @@
 @endsection
 
 @section('sidebar_menu')
-    @include('administrador.partials.panel_iz')
+    @include('panel.partials.panel_iz')
 @endsection
 
 @section('modals')
-    @include('administrador.obra.partials.mod_Ver_Obra')
+    @include('panel.obra.partials.mod_Ver_Obra')
     @include('modals.cargo')
 @endsection
 
