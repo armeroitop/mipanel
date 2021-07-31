@@ -74,7 +74,7 @@
          
             @if (Route::has('login'))                
                 @auth
-                    <li class="get-started"><a href="{{ url('/home') }}">Home</a></li>                        
+                    <li class="get-started"><a href="{{ url('/panel') }}">Panel</a></li>                        
                 @else
                     <li class="get-started"><a href="{{ route('login') }}">Entrar</a></li>
                     @if (Route::has('register'))

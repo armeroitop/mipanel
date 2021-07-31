@@ -1,11 +1,11 @@
 @extends('admin_panel.admin')
 
 @section('sidebar_menu')
-    @include('administrador.partials.panel_iz')
+    @include('panel.partials.panel_iz')
 @endsection
 
 @section('modals')
-    @include('administrador.empresa.partials.modals')
+    @include('panel.empresa.partials.modals')
 @endsection
 
 @section('content')

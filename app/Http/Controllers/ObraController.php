@@ -28,7 +28,7 @@ class ObraController extends Controller
             /* ->addColumn('columna_botones','administrador\obra\partials\botonesDT') */
             ->addColumn('columna_botones',function(Obra $obra) {       
                      
-                return view('administrador.obra.partials.boton', compact('obra'));
+                return view('panel.obra.partials.boton', compact('obra'));
             })
             ->rawColumns(['columna_botones'])
             ->escapeColumns([])
@@ -46,8 +46,7 @@ class ObraController extends Controller
        
 
        
-        $obrasCSS = Cargoable::where([
-                                        ['cargo_id', '=', $cargo->id ],
+        $obrasCSS = Cargoable::where([  ['cargo_id', '=', $cargo->id ],
                                         ['persona_id', '=', $persona->id ],
                                         ['cargoable_type', '=', 'App\Obra'] 
                                     ])->get();
@@ -58,7 +57,7 @@ class ObraController extends Controller
         };
        
         
-        return view('coordinador.obra.index',['obras' => $obras]); 
+        return view('panel.obracss.index',['obras' => $obras]); 
     }
 
 
@@ -267,12 +266,12 @@ class ObraController extends Controller
         //dd($participantes);
         \Session::put('currentObra', $obra );
 
-        return view('administrador.obra.ver',['obra'        => $obra,
-                                             'localidad'    => $localidad,
-                                             'promotor'     => $promotor,
-                                             'participantes' => $participantes,
-                                             'subcontrataciones' => $subcontrataciones
-                                            ]); 
+        return view('panel.obracss.ver',['obra'        => $obra,
+                                         'localidad'    => $localidad,
+                                         'promotor'     => $promotor,
+                                         'participantes' => $participantes,
+                                         'subcontrataciones' => $subcontrataciones
+                                        ]); 
     }
     
 
@@ -305,12 +304,12 @@ class ObraController extends Controller
         //dd($participantes);
         \Session::put('currentObra', $obra );
 
-        return view('coordinador.obra.ver',['obra'        => $obra,
-                                             'localidad'    => $localidad,
-                                             'promotor'     => $promotor,
-                                             'participantes' => $participantes,
-                                             'subcontrataciones' => $subcontrataciones
-                                            ]); 
+        return view('panel.obracss.ver',['obra'        => $obra,
+                                         'localidad'    => $localidad,
+                                         'promotor'     => $promotor,
+                                         'participantes' => $participantes,
+                                         'subcontrataciones' => $subcontrataciones
+                                        ]); 
     }
     
 

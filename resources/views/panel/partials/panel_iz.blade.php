@@ -3,116 +3,76 @@
       <!-- Add icons to the links using the .nav-icon class
            with font-awesome or any other icon font library -->
 
-    
-
-      {{-- Obras CSS--}}
-      @can('coordinador_seguridad') 
-      <li class="nav-item has-treeview menu-closed" id="li_Obras">
-        <a href="#" class="nav-link" id="a_Obras">
+      {{-- Obras --}}
+      <li class="nav-item has-treeview menu-closed" >
+        <a href="#" class="nav-link">
           <i class="nav-icon fas fa-people-carry"></i>
           <p>
-            Obras CSS
+            Obras
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>
         <ul class="nav nav-treeview">
-          <li class="nav-item">
-            <a href="{{route('obra.css')}}" class="nav-link" id="a_Obras_activas">              
-              <i class="fas fa-circle nav-icon"></i>
-              <p>Obras activas</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
-              <p>Obras inactivas</p>
-            </a>
-          </li>
+            @role('administrador_sistema')
+            <li class="nav-item">
+                <a href="{{url('paneladmin/obra')}}" class="nav-link">              
+                {{-- <a href="{{url('paneladmin/obra')}}" class="nav-link {{ request()->is('paneladmin/obra') ? 'active' : ''}}">  --}}             
+                <i class="fas fa-circle nav-icon"></i>
+                <p>Obras</p>
+                </a>
+            </li>
+            @endrole
+            @can('obracss.index')
+            <li class="nav-item">
+                <a href="{{route('obra.css')}}" class="nav-link" id="a_Obras_activas">              
+                <i class="fas fa-circle nav-icon"></i>
+                <p>Obras CSS</p>
+                </a>
+            </li>
+            @endcan
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                <i class="fas fa-circle nav-icon"></i>
+                <p>Subcontrataciones</p>
+                </a> 
+            </li>
         </ul>
       </li>
-      @endcan
 
       {{-- Embresas --}}
-      <li class="nav-item has-treeview menu-closed">
+      <li class="nav-item has-treeview menu-closed" >
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-industry"></i>
           <p>
-            Seguimiento
+            Empresas
             <i class="right fas fa-angle-left"></i>
           </p>
         </a>       
          
         <ul class="nav nav-treeview">
-
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fa fa-eye nav-icon"></i>
-              <p>Visitas</p>
+            <a href="{{url('paneladmin/empresa')}}" class="nav-link">
+              <i class="fas fa-circle nav-icon "></i>
+              <p>Empresa</p>
             </a>
           </li>
-
           <li class="nav-item">
-            <a href="#"  class="nav-link">
-              <i class="fa fa-users nav-icon"></i>
-              <p>Reuniones</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fa fa-file-alt nav-icon"></i>
-              <p>Informes mensuales</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fa fa-bible nav-icon"></i>
-              <p>Libro incidencias</p>
-            </a>
-          </li>
-          
-        </ul>
-      </li>
-
-      {{-- Embresas --}}
-      <li class="nav-item has-treeview menu-closed">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-industry"></i>
-          <p>
-            Empresa
-            <i class="right fas fa-angle-left"></i>
-          </p>
-        </a>       
-         
-        <ul class="nav nav-treeview">
-
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="fas fa-circle nav-icon"></i>
-              <p>Mis documentos</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="{{url('cliente/persona')}}"  class="nav-link">
+            <a href="{{url('paneladmin/trabajador')}}"  class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>Trabajador</p>
             </a>
           </li>
-
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
               <p>Maquinaria</p>
             </a>
           </li>
-          
         </ul>
       </li>
 
       {{-- Usuarios --}}
-      {{-- <li class="nav-item has-treeview menu-closed">
+      <li class="nav-item has-treeview menu-closed">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-user-astronaut"></i>
           <p>
@@ -122,7 +82,7 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="#" class="nav-link active">
+            <a href="{{url('paneladmin/usuario')}}" class="nav-link active">
               <i class="far fa-circle nav-icon"></i>
               <p>Usuarios</p>
             </a>
@@ -134,10 +94,11 @@
             </a>
           </li>
         </ul>
-      </li> --}}
+      </li>
 
       {{-- Roles --}}
-      {{-- <li class="nav-item has-treeview menu-closed">
+      @role('administrador_sistema')
+      <li class="nav-item has-treeview menu-closed">
         <a href="#" class="nav-link">
           <i class="nav-icon fas fa-project-diagram"></i>
           <p>
@@ -147,19 +108,20 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('paneladmin/rol')}}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Rol</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{url('paneladmin/permiso')}}" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Permiso</p>
             </a>
           </li>
         </ul>
-      </li> --}}
+      </li>
+      @endrole
 
       <li class="nav-item">
         <a href="#" class="nav-link">

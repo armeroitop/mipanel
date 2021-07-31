@@ -1,7 +1,7 @@
 @extends('admin_panel.admin')
 
 @section('sidebar_menu')
-    @include('coordinador.partials.panel_iz')
+    @include('panel.partials.panel_iz')
 @endsection
 
 @section('modals')
@@ -18,9 +18,8 @@
             </div>
 
             <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{url('home')}}">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Obra</a></li>
+            <ol class="breadcrumb float-sm-right">                
+                <li class="breadcrumb-item"><a href="{{route('obra.css')}}">Obra</a></li>
                 <li class="breadcrumb-item active">Obras activas</li>
             </ol>
             </div>
@@ -62,7 +61,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td>@include('coordinador.obra.partials.botonesDT')</td>
+                                <td>@include('panel.obracss.partials.botonesDT')</td>
                             </tr>  
                         @endforeach
                     </tbody>  
@@ -104,9 +103,9 @@
         });
        
 
-        $( "#li_Obras" ).removeClass( "menu-close" ).addClass( "menu-open" );
+        /* $( "#li_Obras" ).removeClass( "menu-close" ).addClass( "menu-open" );
         $( "#a_Obras" ).addClass( "active" );
-        $( "#a_Obras_activas" ).addClass( "active" );
+        $( "#a_Obras_activas" ).addClass( "active" ); */
         
     });// fin de  $(document).ready(function()
 
