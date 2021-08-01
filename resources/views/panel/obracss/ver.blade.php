@@ -110,9 +110,9 @@
                 <div class="row">    
                     <div class="col-md-6">
                         <dl class="row">            
-                            <dt class="col-md-4">Promotor</dt> <dd class="col-8"> @isset($promotor){{ $promotor->contratante->nombre }}@endisset</dd>
+                            <dt class="col-4">Promotor</dt> <dd class="col-8"> @isset($promotor){{ $promotor->contratante->nombre }}@endisset</dd>
                             @foreach ($participantes as $participante)
-                            <dt class="col-md-4">{{$participante->cargo->nombre}}</dt><dd class="col-8"> {{$participante->persona->nombre}}  {{$participante->persona->apellidos}}</dd>
+                            <dt class="col-4">{{$participante->cargo->nombre}}</dt><dd class="col-8"> {{$participante->persona->nombre}}  {{$participante->persona->apellidos}}</dd>
                             @endforeach
                             <dt class="col-4"> </dt><dd class="col-sm-8"><button type="button" class="btn btn-success " data-toggle="modal" data-target="#modal-nuevoParticipante">Añadir participante</button> </dd>
                             
@@ -297,137 +297,137 @@
       </div><!-- /.row -->
     </div><!-- /.container-fluid -->
 
-    {{-- ESTADO --}}
-    <div class="container-fluid">
-      <!-- row -->
-      <div class="row">
-        <div class="col-12">
-          <!-- jQuery Knob -->
-          <div class="card collapsed-card">
-            <div class="card-header">
-              <h3 class="card-title"><i class="fa fa-chart-bar"></i>      
-                Estado</h3>
+{{-- ESTADO --}}
+<div class="container-fluid">
+    <!-- row -->
+    <div class="row">
+    <div class="col-12">
+        <!-- jQuery Knob -->
+        <div class="card collapsed-card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fa fa-chart-bar"></i>      
+            Estado</h3>
 
-              <div class="card-tools">
-                <button class="btn btn-tool" type="button" data-card-widget="collapse"><i class="fas fa-plus"></i>
-                </button>
-                <button class="btn btn-tool" type="button" data-card-widget="remove"><i class="fas fa-times"></i>
-                </button>
-              </div>
+            <div class="card-tools">
+            <button class="btn btn-tool" type="button" data-card-widget="collapse"><i class="fas fa-plus"></i>
+            </button>
+            <button class="btn btn-tool" type="button" data-card-widget="remove"><i class="fas fa-times"></i>
+            </button>
             </div>
-            <!-- /.card-header -->
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+
+            <div class="row">  
             <div class="card-body">
-
-              <div class="row">  
-                <div class="card-body">
-                  <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div></div></div><div class="chartjs-size-monitor-shrink"><div></div></div></div>
-                    <canvas width="764" height="250" class="chartjs-render-monitor" id="areaChart" style="width: 764px; height: 250px; display: block; min-height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                  </div>
-                </div>              
-                
-              </div><!-- /.row -->              
-
-              <div class="row">                
-              
-              </div><!-- /.row -->
-              
-            </div><!-- /.card-body -->            
-          </div><!-- /.card -->          
-        </div><!-- /.col -->        
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-
-    {{-- SEGUIMIENTO --}}
-    <div class="container-fluid">
-      <!-- row -->
-      <div class="row">
-        <div class="col-12">
-          <!-- jQuery Knob -->
-          <div class="card collapsed-card">
-            <div class="card-header">
-              <h3 class="card-title"><i class="fa fa-chart-bar"></i> Seguimiento</h3>
-              
-              <div class="card-tools">
-                <button class="btn btn-tool" type="button" data-card-widget="collapse"><i class="fas fa-plus"></i>
-                </button>
-                <button class="btn btn-tool" type="button" data-card-widget="remove"><i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div><!-- /.card-header -->
+                <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div></div></div><div class="chartjs-size-monitor-shrink"><div></div></div></div>
+                <canvas width="764" height="250" class="chartjs-render-monitor" id="areaChart" style="width: 764px; height: 250px; display: block; min-height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+            </div>              
             
-            <div class="card-body">
+            </div><!-- /.row -->              
 
-              <div class="row">      
-                <div class="col-md-3 col-sm-6 col-12">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-info"><i class="fa fa-eye"></i></span>
-      
-                    <div class="info-box-content">
-                      <div class="row">
-                          <div class="col-6">
-                          <span class="info-box-text">Visitas totales</span>
-                          <span class="info-box-number">50</span>
-                        </div>
+            <div class="row">                
+            
+            </div><!-- /.row -->
+            
+        </div><!-- /.card-body -->            
+        </div><!-- /.card -->          
+    </div><!-- /.col -->        
+    </div><!-- /.row -->
+</div><!-- /.container-fluid -->
+
+{{-- SEGUIMIENTO --}}
+<div class="container-fluid">
+    <!-- row -->
+    <div class="row">
+    <div class="col-12">
+        <!-- jQuery Knob -->
+        <div class="card collapsed-card">
+        <div class="card-header">
+            <h3 class="card-title"><i class="fa fa-chart-bar"></i> Seguimiento</h3>
+            
+            <div class="card-tools">
+            <button class="btn btn-tool" type="button" data-card-widget="collapse"><i class="fas fa-plus"></i>
+            </button>
+            <button class="btn btn-tool" type="button" data-card-widget="remove"><i class="fas fa-times"></i>
+            </button>
+            </div>
+        </div><!-- /.card-header -->
+        
+        <div class="card-body">
+
+            <div class="row">      
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-info"><i class="fa fa-eye"></i></span>
+    
+                <div class="info-box-content">
+                    <div class="row">
                         <div class="col-6">
-                          <span class="info-box-text">Visitas mes</span>
-                          <span class="info-box-number">5</span>
-                        </div>
-                      </div>                      
-                    </div><!-- /.info-box-content -->                    
-                  </div><!-- /.info-box -->
-                </div>
+                        <span class="info-box-text">Visitas totales</span>
+                        <span class="info-box-number">50</span>
+                    </div>
+                    <div class="col-6">
+                        <span class="info-box-text">Visitas mes</span>
+                        <span class="info-box-number">5</span>
+                    </div>
+                    </div>                      
+                </div><!-- /.info-box-content -->                    
+                </div><!-- /.info-box -->
+            </div>
 
-                <div class="col-md-3 col-sm-6 col-12">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-warning"><i class="fa fa-users"></i></span>
-      
-                    <div class="info-box-content">
-                      <div class="row">
-                          <div class="col-6">
-                          <span class="info-box-text">Reuniones totales</span>
-                          <span class="info-box-number">50</span>
-                        </div>
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-warning"><i class="fa fa-users"></i></span>
+    
+                <div class="info-box-content">
+                    <div class="row">
                         <div class="col-6">
-                          <span class="info-box-text">Reuniones mes</span>
-                          <span class="info-box-number">5</span>
-                        </div>
-                      </div>                      
-                    </div><!-- /.info-box-content -->                    
-                  </div><!-- /.info-box -->
-                </div>
-                
-                <div class="col-md-3 col-sm-6 col-12">
-                  <div class="info-box">
-                    <span class="info-box-icon bg-danger"><i class="fa fa-bible"></i></span>
-      
-                    <div class="info-box-content">
-                      <div class="row">
-                          <div class="col-6">
-                          <span class="info-box-text">Anotaciones totales</span>
-                          <span class="info-box-number">50</span>
-                        </div>
+                        <span class="info-box-text">Reuniones totales</span>
+                        <span class="info-box-number">50</span>
+                    </div>
+                    <div class="col-6">
+                        <span class="info-box-text">Reuniones mes</span>
+                        <span class="info-box-number">5</span>
+                    </div>
+                    </div>                      
+                </div><!-- /.info-box-content -->                    
+                </div><!-- /.info-box -->
+            </div>
+            
+            <div class="col-md-3 col-sm-6 col-12">
+                <div class="info-box">
+                <span class="info-box-icon bg-danger"><i class="fa fa-bible"></i></span>
+    
+                <div class="info-box-content">
+                    <div class="row">
                         <div class="col-6">
-                          <span class="info-box-text">Anotaciones mes</span>
-                          <span class="info-box-number">5</span>
-                        </div>
-                      </div>                      
-                    </div><!-- /.info-box-content -->                    
-                  </div><!-- /.info-box -->
-                </div>
+                        <span class="info-box-text">Anotaciones totales</span>
+                        <span class="info-box-number">50</span>
+                    </div>
+                    <div class="col-6">
+                        <span class="info-box-text">Anotaciones mes</span>
+                        <span class="info-box-number">5</span>
+                    </div>
+                    </div>                      
+                </div><!-- /.info-box-content -->                    
+                </div><!-- /.info-box -->
+            </div>
 
-              </div><!-- /.row -->              
+            </div><!-- /.row -->              
 
-              <div class="row">                
-              
-              </div><!-- /.row -->
-              
-            </div><!-- /.card-body -->            
-          </div><!-- /.card -->          
-        </div><!-- /.col -->        
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+            <div class="row">                
+            
+            </div><!-- /.row -->
+            
+        </div><!-- /.card-body -->            
+        </div><!-- /.card -->          
+    </div><!-- /.col -->        
+    </div><!-- /.row -->
+</div><!-- /.container-fluid -->
 
-   
+
     
 </section>
   
