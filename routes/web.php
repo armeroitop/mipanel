@@ -80,7 +80,8 @@ Route::middleware(['auth'])->group(function(){
     Route::get('obra/{obra}', 'ObraController@ver')->name('obra.ver')->middleware('has.role:administrador_sistema');
     Route::resource('api/obra', 'ObraController')->middleware(['has.role:administrador_sistema']);
    
-
+ //Codigo
+ 
  //Empresas
     Route::get('paneladmin/empresa', function () {
         return view('panel/empresa/index');
@@ -101,7 +102,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('cliente/persona', 'PersonaController@personaCliente')->name('persona.cliente');
     Route::resource('api/persona', 'PersonaController');
 
-//Cargo
+ //Cargo
     Route::post('cargo/asignaCargoParticipante', 'CargoController@asignaCargoParticipante')->name('cargo.asignaCargoParticipante');
     Route::resource('api/cargo', 'CargoController');
 
@@ -111,6 +112,8 @@ Route::middleware(['auth'])->group(function(){
 
  //Subcontratacion
     Route::post('subcontratacion/store', 'SubcontratacionController@store')->name('subcontratacion.store')->middleware('has.role:administrador_sistema');
+
+ 
 
  //Roles
     Route::get('paneladmin/rol', function () {

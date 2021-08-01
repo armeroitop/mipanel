@@ -151,7 +151,7 @@ class EmpresaController extends Controller
         }
 
         //dd($trabajadores);
-        return view('administrador.empresa.ver',[
+        return view('panel.empresa.ver',[
             'contratos' => $contratosID,
             'empresa' => $empresa,
             'trabajadores' =>  $trabajadores
