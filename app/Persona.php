@@ -21,12 +21,13 @@ class Persona extends Model
     }
 
 
-    // tiene una relacion laboral con una empresa
-   /*  public function contrato(){
+     // tiene una relacion laboral con una empresa
+    public function contrato(){
 
-        return $this->hasManyThrough('App\Contrato', 'App\EstadoLaboral'); //relacion muchos a muchos "una persona tiene muchos cargos y un cargo tiene muchas personas"
-    } */
+        return $this->hasMany('App\Contrato'); //relacion muchos a muchos "una persona tiene muchos cargos y un cargo tiene muchas personas"
+    } 
 
+    // tiene una relacion laboral con una o varias empresas a trabes de la tabla "contrato"
     public function empresa()
     {
         return $this->belongsToMany('App\Empresa','contratos','persona_id','empresa_id')->withPivot('id')->withTimestamps();

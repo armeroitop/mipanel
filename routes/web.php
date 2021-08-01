@@ -81,6 +81,8 @@ Route::middleware(['auth'])->group(function(){
     Route::resource('api/obra', 'ObraController')->middleware(['has.role:administrador_sistema']);
    
  //Codigo
+    //Route::post('codigo/asignaCargoParticipante', 'CodigoController@store')->name('codigo.store');
+    Route::resource('api/codigo', 'CodigoController');
  
  //Empresas
     Route::get('paneladmin/empresa', function () {

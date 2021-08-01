@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Codigo;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CodigoController extends Controller
@@ -19,12 +20,35 @@ class CodigoController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * Muestra en el Select2 las empresas en las que el usuario tiene un contrato laboral activo
+     * 
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        $usuario = Auth::user();
+        $persona = $usuario->persona()->get()->last();
+        $contratos = $persona->contrato()->with('estadoLaboral')->get()->all();
+             
+        //Creamos unos contenedores
+        $empresas = collect([]);
+        
+        foreach ($contratos as $contrato) {           
+            if ( $contrato->estadoLaboral->last()->estado == 'alta' ) {  
+                $empresas->push($contrato->empresa);      
+            }            
+        }
+       
+        //Formateamos la respuesta para que la lea SELECT2
+        $contenedor = [];      
+        
+        foreach ($empresas as $empresa) {
+                       
+            $contenedor[]= ['id' => $empresa->id, 'text' => $empresa->nombre];            
+        }
+       
+        return response()->json($contenedor);
     }
 
     /**
@@ -35,7 +59,18 @@ class CodigoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $codigo = new Codigo($request->all());
+        $codigo->save();
+        //dd($codigo);
+
+        $notification = array(
+            'titulo' => 'Se ha guardado',
+            'message' => 'el código ',
+            'alert-type' => 'success'
+        ); 
+        
+        return back()->with($notification);
+        
     }
 
     /**

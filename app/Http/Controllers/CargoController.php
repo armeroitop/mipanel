@@ -34,7 +34,8 @@ class CargoController extends Controller
                        
             $contenedor[]= ['id' => $cargo->id, 'text' => $cargo->nombre];            
         }
-      
+        
+       // dd($contenedor);
        return response()->json($contenedor);
     }
 
@@ -103,6 +104,7 @@ class CargoController extends Controller
     public function asignaCargoParticipante(Request $request)
     {
         $cargoable = new Cargoable($request->all());
+        //dd($cargoable);
         $cargoable->cargoable_type = 'App\Obra';
         $cargoable->cargoable_id = $request->obra_id;
         $cargoable->save();

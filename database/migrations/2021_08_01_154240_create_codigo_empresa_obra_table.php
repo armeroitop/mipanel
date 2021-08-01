@@ -16,16 +16,16 @@ class CreateCodigoEmpresaObraTable extends Migration
         Schema::create('codigo_empresa_obra', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->unsignedInteger('empresa_id');
-            $table->unsignedInteger('obra_id');
+            $table->unsignedBigInteger('empresa_id');
+            $table->unsignedBigInteger('obra_id');
+
+            $table->string('codigo');
 
             //Relaciones
             $table->foreign('empresa_id')->references('id')->on('empresas');
             $table->foreign('obra_id')->references('id')->on('obras');
 
-            $table->string('codigo');
-
-
+           
             $table->timestamps();
         });
     }

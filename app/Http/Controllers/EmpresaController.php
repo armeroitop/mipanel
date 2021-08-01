@@ -132,7 +132,7 @@ class EmpresaController extends Controller
      */
     public function ver(Empresa $empresa)
     {
-        //Traemos los contratos que tiene esta empresa
+        //Traemos los contratos laborales que tiene esta empresa
         $contratos = Contrato::where( 'empresa_id', '=', $empresa->id)->with('estadoLaboral','persona')->get();
         
         //dd($contratos);

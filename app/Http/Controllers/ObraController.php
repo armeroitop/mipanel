@@ -255,7 +255,7 @@ class ObraController extends Controller
         $subcontrataciones = $obra->subcontratacion()->with(['contratado'])->get();
         //$subcontrataciones->contratado;
 
-        //TODO devolver los participantes de esta obra
+        // Devuelve los participantes de esta obra
         $obra->cargos;
         $participantes = Cargoable::where([
                                             ['cargoable_id', '=', $obra->id ],
@@ -264,14 +264,17 @@ class ObraController extends Controller
                                      
        
         //dd($participantes);
+        
+        //TODO hacer que devuelva el codigo para la obra del promotor y de la empresa en la que está el Coordinador 
+
         \Session::put('currentObra', $obra );
 
-        return view('panel.obracss.ver',['obra'        => $obra,
-                                         'localidad'    => $localidad,
-                                         'promotor'     => $promotor,
-                                         'participantes' => $participantes,
-                                         'subcontrataciones' => $subcontrataciones
-                                        ]); 
+        return view('panel.obra.ver',['obra'        => $obra,
+                                        'localidad'    => $localidad,
+                                        'promotor'     => $promotor,
+                                        'participantes' => $participantes,
+                                        'subcontrataciones' => $subcontrataciones
+                                    ]); 
     }
     
 

@@ -14,6 +14,7 @@
 @section('modals')
     @include('panel.obra.partials.mod_Ver_Obra')
     @include('modals.cargo')
+    @include('modals.crear_codigo')
 @endsection
 
 @section('content')
@@ -72,8 +73,8 @@
                 </div>
                 <div class="col-md-6">
                   <dl class="row">
-                    <dt class="col-4">Código cliente</dt><dd class="col-8">{{$obra->nombre}}</dd>        {{-- //TODO  Crear boton condicional de introducir el codigo de obra del cliente--}}         
-                    <dt class="col-4">Código empresa</dt><dd class="col-8">{{$obra->descripcion}}</dd>   {{-- //TODO  Crear boton condicional de introducir el codigo de obra de tu empresa--}}
+                    <dt class="col-4">Código promotor</dt><dd class="col-8"><button type="button" class="btn btn-success " data-toggle="modal" data-target="#modal-crearCodigoObraPromotor">Crear código</button></dd>        {{-- //TODO  Crear boton condicional de introducir el codigo de obra del cliente--}}         
+                    <dt class="col-4">Código empresa</dt><dd class="col-8"><button type="button" class="btn btn-success " data-toggle="modal" data-target="#modal-crearCodigoObraEmpresa">Crear código</button></dd>   {{-- //TODO  Crear boton condicional de introducir el codigo de obra de tu empresa--}}
                     
                   </dl>                
                 </div>
@@ -549,7 +550,7 @@
   }
   
 
-  $('#selec2Persona').select2({
+    $('#selec2Persona').select2({
         theme: 'bootstrap4',            
         placeholder: "Busca una persona",
         allowClear: true,
@@ -604,8 +605,7 @@
         },//fin ajax    
     });//Fin Selec2 selec2Cargo
 
-
-
+    
     
     //--------------
     //- AREA CHART -
@@ -673,3 +673,5 @@
 
 </script>
 @endsection
+
+@yield('scriptModals')

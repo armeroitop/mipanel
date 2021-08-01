@@ -34,4 +34,9 @@ class Obra extends Model
     {
         return $this->morphToMany(Cargo::class,'cargoable');
     }
+
+    //Una obra tiene muchos códigos, el del cliente/promotor y el de las empresas que quieran codificar la obra
+    public function codigo(){
+        return $this->hasMany('App\Codigo');
+    }
 }
