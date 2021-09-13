@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Codigo;
+use App\Persona;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -59,22 +60,21 @@ class CodigoController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $codigo = new Codigo($request->all());
         $codigo->save();
-        //dd($codigo);
-
+        
         $notification = array(
             'titulo' => 'Se ha guardado',
             'message' => 'el código ',
             'alert-type' => 'success'
-        ); 
-        
-        return back()->with($notification);
-        
+        );         
+        return back()->with($notification);        
     }
 
     /**
      * Display the specified resource.
+     * //TODO deberia mostrar si la obra tiene ya un codigo tanto de cliente como de la propia empresa
      *
      * @param  \App\Codigo  $codigo
      * @return \Illuminate\Http\Response

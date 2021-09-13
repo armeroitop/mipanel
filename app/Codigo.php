@@ -14,4 +14,6 @@ class Codigo extends Model
         'obra_id',
         'codigo'
     ];
+
+    
 }

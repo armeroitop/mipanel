@@ -36,5 +36,13 @@ class Empresa extends Model
 
 
     // tiene trabajadores con estado baja
+
+
+    // tiene un codigo para una obra 
+    public function codigoObra()
+    {
+        //return $this->hasOne('App\Codigo','empresa_id','obra_id');
+        return $this->hasMany('App\Codigo');
+    }
     
 }

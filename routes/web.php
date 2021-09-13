@@ -114,7 +114,8 @@ Route::middleware(['auth'])->group(function(){
 
  //Subcontratacion
     Route::post('subcontratacion/store', 'SubcontratacionController@store')->name('subcontratacion.store')->middleware('has.role:administrador_sistema');
-
+    //Route::delete('subcontratacion/{product}', 'SubcontratacionController@destroy')->name('subcontratacion.destroy');
+    Route::resource('api/subcontratacion', 'SubcontratacionController');
  
 
  //Roles

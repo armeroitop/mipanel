@@ -15,19 +15,21 @@
             
             <div class="form-group">
                 <label>Código</label>
-                <input class="form-control " type="text" placeholder="Escribe el código de la obra" style="width: 100%;" id="" name="codigo_id"></input>                                  
+                <input class="form-control " type="text" placeholder="Escribe el código de la obra" style="width: 100%;" id="" name="codigo"></input>                                  
             </div><!-- /.form-group -->
            
-
             <div>              
-                <input  id="obra_id" type="hidden"  name="obra_id" value="{{$obra->id}}">             
+                <input  id="obra_id" type="hidden"  name="obra_id" value="{{$obra->id}}">   
+                @if ($promotor)
+                  <input  id="empresa_id" type="hidden"  name="empresa_id" value="{{$promotor->contratante_id}}">
+                @endif          
             </div>  
-           
+            
           </div>   <!-- /modal-body -->       
         
           <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default btn-outline-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="submit" data-target="trigger" class="btn btn-primary" >Guardar</button>
+            <button type="button" class="btn btn-default btn-outline-secondary" data-dismiss="modal">Cerrar</button>            
+            <button type="submit" data-target="trigger" class="btn btn-primary">Guardar</button>
           </div>
         </form>
   

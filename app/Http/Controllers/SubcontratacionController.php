@@ -88,13 +88,21 @@ class SubcontratacionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina una subcontratación
      *
      * @param  \App\Subcontratacion  $subcontratacion
      * @return \Illuminate\Http\Response
      */
     public function destroy(Subcontratacion $subcontratacion)
     {
-        //
+        //dd($subcontratacion->contratado->nombre);
+        
+        $notification = array(
+            'message' => 'la subcontratacion de '.$subcontratacion->contratado->nombre ,
+            'titulo' => 'Se ha borrado',
+            'alert-type' => 'success'
+        ); 
+        $subcontratacion->delete();
+        return back()->with($notification);
     }
 }

@@ -248,11 +248,43 @@ class ObraController extends Controller
 
         if ($localidad) {$localidad->provincia;}    
 
-        $promotor = $obra->subcontratacion()->where('nivel', -1)->first();
+        $promotor = $obra->subcontratacion()->where('nivel', -1)->first(); //FIXME Aquí te traes un modelo de subcontratación, sería mas interesante obtener el modelo de la empresa en su lugar       
 
-        if($promotor){$promotor->contratante;}
+        if($promotor){            
+            $codigoPromotor = $promotor->contratante->codigoObra()->where('obra_id',$obra->id)->first();
+            //dd($codigoPromotor) ;        
+        }else{$codigoPromotor = null;}
+
+        $usuario = Auth::user();
+        $persona = $usuario->persona()->get()->last();
+        $contratos = $persona->contrato()->with('estadoLaboral')->get()->all();
+                
+        //Creamos unos contenedores
+        $empresasUsuario = collect([]);
+        $codigosEmpresas = collect([]);
+
+        foreach ($contratos as $contrato) {           
+            if ( $contrato->estadoLaboral->last()->estado == 'alta' ) {  
+                //Traemos las empresas en las que el usuario trabaja y tiene un contrato dado de alta
+                $empresaUsuario = $contrato->empresa;
+                
+                //Traemos el código que asigna a la obra la empresa anterior
+                $codigoEmpresa = $empresaUsuario->codigoObra()->where('obra_id',$obra->id)->first();
+                
+                if($empresaUsuario && $codigoEmpresa){
+                    //$codigosEmpresas[] = ['empresa'=> $empresaUsuario->nombre, 'codigo'=> $codigoEmpresa->codigo]; 
+                    //$codigosEmpresas = ['empresa'=> $empresaUsuario->nombre, 'codigo'=> $codigoEmpresa->codigo]; 
+                    $empresasUsuario->push($empresaUsuario);
+                    $codigosEmpresas->push($codigoEmpresa);
+                }                
+                //$empresasUsuario->push($contrato->empresa->with('codigoObra')->where('obra_id',$obra->id)->get());      
+            }            
+        }
+        
+        //dd($codigosEmpresas);
 
         $subcontrataciones = $obra->subcontratacion()->with(['contratado'])->get();
+        
         //$subcontrataciones->contratado;
 
         // Devuelve los participantes de esta obra
@@ -263,17 +295,20 @@ class ObraController extends Controller
                                         ])->with(['persona','cargo'])->get();
                                      
        
-        //dd($participantes);
         
-        //TODO hacer que devuelva el codigo para la obra del promotor y de la empresa en la que está el Coordinador 
+        
+        //TODO hacer que devuelva el codigo para la obra del promotor y de la empresa en la que está el Coordinador (Falta la parte del promotor)
 
-        \Session::put('currentObra', $obra );
+        \Session::put('currentObra', $obra );        
 
         return view('panel.obra.ver',['obra'        => $obra,
                                         'localidad'    => $localidad,
                                         'promotor'     => $promotor,
                                         'participantes' => $participantes,
-                                        'subcontrataciones' => $subcontrataciones
+                                        'subcontrataciones' => $subcontrataciones,
+                                        'codigoPromotor' => $codigoPromotor,
+                                        'codigosEmpresas' => $codigosEmpresas,
+                                        'empresasUsuario' => $empresasUsuario
                                     ]); 
     }
     

@@ -1,10 +1,7 @@
 @extends('admin_panel.admin')
 
 @section('styles')
-<style>
-  
-  </style>
-    
+    <style>   </style>
 @endsection
 
 @section('sidebar_menu')
@@ -12,9 +9,10 @@
 @endsection
 
 @section('modals')
-    @include('panel.obra.partials.mod_Ver_Obra')
+    @include('panel.modals.subcontratacion_crear')
+    @include('panel.modals.subcontratacion_eliminar')
     @include('modals.cargo')
-    @include('modals.crear_codigo')
+    @include('panel.modals.codigo_crear')
 @endsection
 
 @section('content')
@@ -73,9 +71,25 @@
                 </div>
                 <div class="col-md-6">
                   <dl class="row">
-                    <dt class="col-4">Código promotor</dt><dd class="col-8"><button type="button" class="btn btn-success " data-toggle="modal" data-target="#modal-crearCodigoObraPromotor">Crear código</button></dd>        {{-- //TODO  Crear boton condicional de introducir el codigo de obra del cliente--}}         
-                    <dt class="col-4">Código empresa</dt><dd class="col-8"><button type="button" class="btn btn-success " data-toggle="modal" data-target="#modal-crearCodigoObraEmpresa">Crear código</button></dd>   {{-- //TODO  Crear boton condicional de introducir el codigo de obra de tu empresa--}}
-                    
+                    <dt class="col-4">Código promotor</dt>
+                        @if ($codigoPromotor)
+                            <dd class="col-8">{{ $codigoPromotor->codigo }}</dd>                            
+                        @else
+                            @if($promotor)
+                                <dd class="col-8"><button type="button" class="btn btn-success " data-toggle="modal" data-target="#modal-crearCodigoObraPromotor">Crear código</button></dd>
+                            @else
+                            <dd class="col-8">Debes asignar un promotor en editar obra</dd>
+                            @endif                        
+                        @endif
+                                {{-- //TODO  Crear boton condicional de introducir el codigo de obra del cliente--}}         
+                    <dt class="col-4">Código empresa</dt>
+                        @if (count($codigosEmpresas)>0)
+                            @for ($i = 0; $i <count( $codigosEmpresas); $i++)
+                                <dd class="col-8">{{$empresasUsuario[$i]->nombre}} {{ $codigosEmpresas[$i]->codigo}} </dd>                             
+                            @endfor                            
+                        @else
+                            <dd class="col-8"><button type="button" class="btn btn-success " data-toggle="modal" data-target="#modal-crearCodigoObraEmpresa">Crear código</button></dd>   {{-- //TODO  Crear boton condicional de introducir el codigo de obra de tu empresa--}}
+                        @endif
                   </dl>                
                 </div>
               </div><!-- /.row -->              
@@ -431,10 +445,6 @@
 
     
 </section>
-  
-
-
-
 @endsection
 
 
@@ -442,66 +452,42 @@
 @section('script')  
 <script>
   
-  $(document).ready(function() {
-    //Initialize Select2 Elements
-    $('#selec2Subcontratista').select2({
-        theme: 'bootstrap4',
-        placeholder: "Selecciona una empresa",
-        allowClear: true,
-        minimumInputLength: 2, 
-        ajax:{
-            //url:"/api/obra/create",
-            url:"/api/empresa/create",
-            type: "GET",
-            dataType: "json",
-            delay: 250,
-            cache: true,
-            data: function (params) {
-                return {
-                    q: params.term, // search term
-                    page: params.page
-                };
-            },
-            processResults: function (data, params) {                    
-                params.page = params.page || 1;
-                return {
-                    results: data,
-                    pagination: {more: (params.page * 10) < data.total_count}                       
-                };    
-            }, 
-        },//fin ajax    
-    });//Fin Selec2 selec2Promotor
-
+  $(document).ready(function() {    
     generarArbolSubcontratacion();
-
-    generarChart();
-   
+    generarChart();   
   })//Fin document ready
 
   function generarArbolSubcontratacion(){
     var subcontrataciones = {!! $subcontrataciones !!} ;
-    //console.log(subcontrataciones);
+    console.log(subcontrataciones);
     
     //Este código crea el arbol de subcontrataciones
     subcontrataciones.forEach(element => {    
 
-      //Este codigo crea el ID de la raiz desde donde vamos a colgar el hijo
-      var raiz;
-      if (element.contratante_id == element.contratado_id) {
-        raiz = '#arbolsubcontratacion';        
-      } else {       
-        
-        subcontrataciones.forEach(e => {
-         /*  if (element.contratante_id == e.contratado_id) {
-            raiz = '#subcont'+e.id+'';
-          } */
-          if (element.orden == e.id) {
-            raiz = '#subcont'+e.id+'';
-          }
-        });                
-      }
+        //Este codigo crea el ID de la raiz desde donde vamos a colgar el hijo
+        var raiz;
+        var tieneHijo = true;
+        var raizBotonEliminarSubcontratacion;
+        var registroPadresId = [];
+        if (element.contratante_id == element.contratado_id && element.nivel == -1) {
+            raiz = '#arbolsubcontratacion';        
+        } else {  
+            subcontrataciones.forEach(e => {
+                /*  if (element.contratante_id == e.contratado_id) {
+                raiz = '#subcont'+e.id+'';
+                } */                
+                if (element.orden == e.id) {
+                    raiz = '#subcont'+e.id+'';                    
+                }
+               
+                registroPadresId.push(e.orden);
+            });                
+        }
 
-      var boton = '<div class="btn-group ">\
+
+        raizBotonEliminarSubcontratacion = "#empresaSubcontratada"+element.id;
+
+        var boton = '<div class="btn-group ">\
                     <button class="btn btn-default dropdown-toggle dropdown-icon btn-sm" type="button" data-toggle="dropdown">\
                       <i class="fa fa-cog"></i><span class="sr-only">Toggle Dropdown</span></button>\
                       <div class="dropdown-menu" role="menu">\
@@ -509,39 +495,43 @@
                         <a class="dropdown-item" href="#">Another action</a>\
                         <a class="dropdown-item" href="#">Something else here</a>\
                         <div class="dropdown-divider"></div>\
-                        <a class="dropdown-item" href="#">Separated link</a>\
-                      </div>\
+                           <div id="empresaSubcontratada'+element.id+'"></div>\
+                        </div>\
                   </div>';
-
-                 /*  onclick="subcontratar('+element.contratante_id+','+element.nivel+','+element.obra_id+')" */
+                  
+                  
 
       //Si es el primer hijo le agregamos el encabezado de lista ul
-      if($(raiz).children('ul').length > 0){
-        console.log(raiz+' segundo hijo '+element.contratado.nombre+' de '+element.contratante_id)
-        
-        $(raiz).children('ul').append(          
-          '<li id="subcont'+element.id+'">' + element.contratado.nombre +'&nbsp;'+ boton + '</li>'
-        );
+        if($(raiz).children('ul').length > 0){
+            console.log(raiz+' segundo hijo '+element.contratado.nombre+' de '+element.contratante_id)
+            
+            $(raiz).children('ul').append(          
+            '<li id="subcont'+element.id+'">' + element.contratado.nombre +'&nbsp;'+ boton + '</li>'
+            );
 
-      }else{
-        console.log(raiz+' primer hijo '+element.contratado.nombre+' de '+element.contratante_id)
-        $(raiz).append(
-          '<ul><li id="subcont'+element.id+'">'+element.contratado.nombre +'&nbsp;'+ boton +'</li></ul>'          
-        );
-      }
-     /* $(raiz).append(          
-        '<div class="col-11" id="subcont'+element.id+'">'+element.contratado.nombre+'</div>'        
-      ); */ 
-           
+        }else{
+            console.log(raiz+' primer hijo '+element.contratado.nombre+' de '+element.contratante_id)
+            $(raiz).append(
+            '<ul><li id="subcont'+element.id+'">'+element.contratado.nombre +'&nbsp;'+ boton +'</li></ul>'          
+            );
+        }
+
+        
+        //Si no tiene hijos (subcontrataciones) agregamos el boton de eliminar la subcontratacion. Lo del nivel diferente a -1 es para que no se agregue al promotor. La vida es asin, no la he inventado YOO
+        if(!registroPadresId.includes(element.id)&& element.nivel != -1){
+            $(raizBotonEliminarSubcontratacion).append(
+                '<a class="dropdown-item" type="button" data-toggle="modal" data-target="#modal-eliminaSubcontratacion"  onclick="eliminaSubcontratacion('+element.id+' ,\''+element.contratado.nombre+'\')" >Eliminar subcontratación</a>'
+            ); 
+        }
+          
     });//fin del bucle
 
     
   }
 
-
+  //Esta función carga en un Modal  los datos pasados
   function subcontratar(contratado_id,nivel,obra_id,orden)   {
-    console.log('el id del contratante es: ' +contratado_id +' '+nivel+ ' ' +obra_id) ;
-
+    console.log('el id del contratante es: ' +contratado_id +' '+nivel+ ' ' +obra_id);
     
     $("#contratante_id").val(contratado_id);//en nuevo contratante es el viejo contratado
     $("#nivel").val(nivel);
@@ -549,7 +539,6 @@
     $("#obra_id").val(obra_id);
   }
   
-
     $('#selec2Persona').select2({
         theme: 'bootstrap4',            
         placeholder: "Busca una persona",

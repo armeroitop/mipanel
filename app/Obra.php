@@ -36,7 +36,7 @@ class Obra extends Model
     }
 
     //Una obra tiene muchos códigos, el del cliente/promotor y el de las empresas que quieran codificar la obra
-    public function codigo(){
-        return $this->hasMany('App\Codigo');
+    public function codigoObra(){
+        return $this->hasMany('App\Codigo','obra_id','empresa_id');
     }
 }

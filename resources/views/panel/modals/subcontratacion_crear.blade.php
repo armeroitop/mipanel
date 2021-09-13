@@ -53,3 +53,37 @@
   </div>{{--fin MODAL CREA OBRA --}}
 
 
+@section('script') 
+  @parent
+    <script>
+        //Initialize Select2 Elements. Se cargan las empresas en "Subcontratar a"
+        $('#selec2Subcontratista').select2({
+            theme: 'bootstrap4',
+            placeholder: "Selecciona una empresa",
+            allowClear: true,
+            minimumInputLength: 2, 
+            ajax:{
+            //url:"/api/obra/create",
+                url:"/api/empresa/create",
+                type: "GET",
+                dataType: "json",
+                delay: 250,
+                cache: true,
+                data: function (params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+            },
+                processResults: function (data, params) {                    
+                    params.page = params.page || 1;
+                    return {
+                        results: data,
+                        pagination: {more: (params.page * 10) < data.total_count}                       
+                    };    
+                }, 
+            },//fin ajax    
+        });//Fin Selec2 selec2Promotor
+
+    </script>
+@endsection
